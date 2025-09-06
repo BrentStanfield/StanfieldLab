@@ -18,8 +18,7 @@
       localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
     });
   }
-  const y = document.getElementById('year');
-  if(y){ y.textContent = new Date().getFullYear(); }
+  const y = document.getElementById('year'); if(y){ y.textContent = new Date().getFullYear(); }
 
   // People
   const peopleGrid = document.getElementById('peopleGrid');
@@ -27,15 +26,13 @@
     fetch('assets/people.json').then(r=>r.json()).then(people=>{
       peopleGrid.innerHTML = people.map(p => `
         <article class="person-card">
-          <img src="${p.photo || 'assets/placeholder-portrait.jpg'}" alt="${p.name} portrait">
+          <img src="${p.photo || 'assets/placeholder-portrait.jpg'}" alt="${p.name} portrait" style="border-radius:10px;aspect-ratio:1/1;object-fit:cover;background:#ddd;">
           <h3>${p.name}</h3>
           <p class="muted">${p.role || ''}</p>
           ${p.email ? `<p><a href="mailto:${p.email}">${p.email}</a></p>`: ''}
         </article>
       `).join('');
-    }).catch(()=>{
-      peopleGrid.innerHTML = '<p class="muted">Could not load people.json</p>';
-    });
+    }).catch(()=> peopleGrid.innerHTML = '<p class="muted">Could not load people.json</p>');
   }
 
   // Publications
@@ -73,8 +70,8 @@
       }
       renderPubs();
     });
-    if(pubSearch){ pubSearch.addEventListener('input', renderPubs); }
-    if(pubYearFilter){ pubYearFilter.addEventListener('change', renderPubs); }
+    if(pubSearch) pubSearch.addEventListener('input', renderPubs);
+    if(pubYearFilter) pubYearFilter.addEventListener('change', renderPubs);
   }
 
   // News
@@ -89,8 +86,6 @@
           ${n.link ? `<p><a href="${n.link}" target="_blank" rel="noopener">Read more</a></p>` : ''}
         </article>
       `).join('');
-    }).catch(()=>{
-      newsFeed.innerHTML = '<p class="muted">Could not load news.json</p>';
-    });
+    }).catch(()=> newsFeed.innerHTML = '<p class="muted">Could not load news.json</p>');
   }
 })();

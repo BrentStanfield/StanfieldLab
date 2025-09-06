@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
   <title>Publications • Stanfield Lab</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
-  <link rel="icon" href="assets/favicon.ico">
+  <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -15,9 +13,8 @@
 
 <header class="site-header" role="banner">
   <div class="container header-wrap">
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Stanfield Lab home">
       <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
-      <span class="brand-text">Stanfield Lab</span>
     </a>
     <nav aria-label="Primary">
       <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
@@ -37,12 +34,22 @@
 
   <main id="main" class="container">
 <h1>Publications</h1>
+
+<p class="muted">
+  This page auto-loads from <code>assets/publications.json</code>.
+  Your PubMed author search is linked here:
+  <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Stanfield+BA" target="_blank" rel="noopener">
+    PubMed: Stanfield BA
+  </a>.
+</p>
+
 <div class="pub-toolbar">
   <input id="pubSearch" type="search" placeholder="Search by title, author, year…" aria-label="Search publications">
   <select id="pubYearFilter" aria-label="Filter by year"></select>
 </div>
 <ol id="pubList" class="pub-list" aria-live="polite"></ol>
-<p class="muted">Manage publications in <code>assets/publications.json</code>. Supports title, authors, journal, year, doi, and url.</p>
+
+<p class="muted">To resync from PubMed automatically, see <code>tools/fetch_pubmed.py</code> and the GitHub Action in <code>.github/workflows/sync_pubmed.yml</code>.</p>
 </main>
 
 <footer class="site-footer" role="contentinfo">

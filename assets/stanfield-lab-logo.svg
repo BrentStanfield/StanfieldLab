@@ -1,21 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" viewBox="0 0 640 160">
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="180" viewBox="0 0 740 180">
   <defs>
-    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+    <linearGradient id="goldFade" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#FDD023" />
-      <stop offset="100%" stop-color="#ffe98a" />
+      <stop offset="100%" stop-color="#ffd95a" />
     </linearGradient>
+    <style>
+      .purple{stroke:#461D7C; fill:none; stroke-width:6; stroke-linecap:round; stroke-linejoin:round}
+      .purple-fill{fill:#461D7C}
+      .gold{fill:url(#goldFade)}
+      text{font-family:Inter,Arial,Helvetica,sans-serif; font-weight:800}
+    </style>
   </defs>
-  <rect width="100%" height="100%" fill="white"/>
-  <circle cx="70" cy="80" r="68" fill="none" stroke="#461D7C" stroke-width="2" opacity="0.2"/>
-  <circle cx="70" cy="80" r="52" fill="none" stroke="#461D7C" stroke-width="2" opacity="0.25"/>
-  <polygon points="70,30 98,46 98,78 70,94 42,78 42,46" fill="none" stroke="#461D7C" stroke-width="2" opacity="0.5"/>
-  <circle cx="70" cy="62" r="8" fill="#461D7C" opacity="0.9"/>
-  <path d="M26,98 q18,-22 50,-18 q22,2 34,12 q6,5 6,12 q0,9 -9,14 q-9,6 -26,6 q-28,0 -55,-26z"
-        fill="url(#g1)" opacity="0.9"/>
-  <path d="M44,40 C68,20 94,24 110,46
-           M44,40 C58,58 86,62 110,46"
-        fill="none" stroke="#461D7C" stroke-width="2" opacity="0.6"/>
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="150" y="88" font-size="44" font-weight="800" fill="#461D7C">Stanfield Lab</text>
+
+  <!-- Icon block -->
+  <g transform="translate(20,15)">
+    <!-- Virus capsid (hexagon) -->
+    <polygon class="purple" points="60,10 108,38 108,94 60,122 12,94 12,38"/>
+    <!-- Virus core -->
+    <circle cx="60" cy="66" r="10" class="purple-fill"/>
+
+    <!-- DNA double helix (two curves + rungs) -->
+    <path d="M130,20 C160,8 188,28 210,50 C232,72 248,102 272,120" class="purple"/>
+    <path d="M130,120 C160,132 188,112 210,90 C232,68 248,38 272,20" class="purple"/>
+    <!-- Rungs -->
+    <g class="purple" opacity="0.8">
+      <line x1="140" y1="30" x2="140" y2="110"/>
+      <line x1="160" y1="24" x2="160" y2="116"/>
+      <line x1="180" y1="28" x2="180" y2="112"/>
+      <line x1="200" y1="40" x2="200" y2="100"/>
+      <line x1="220" y1="56" x2="220" y2="84"/>
+    </g>
+
+    <!-- Abstract guinea pig silhouette (one-stroke body) -->
+    <path d="M120,128
+             Q165,110 205,114
+             Q235,116 250,126
+             Q260,132 260,142
+             Q258,152 246,158
+             Q226,168 190,168
+             Q145,168 110,144 Z"
+          class="gold"/>
+
+    <!-- Thin circle to unify icon -->
+    <circle cx="160" cy="90" r="86" class="purple" opacity="0.2"/>
   </g>
+
+  <!-- Wordmark -->
+  <text x="330" y="105" font-size="56" fill="#461D7C">Stanfield Lab</text>
 </svg>
