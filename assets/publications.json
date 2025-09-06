@@ -1,18 +1,18 @@
 [
   {
-    "title": "Title of a relevant paper",
-    "authors": "Doe J, Stanfield BA",
-    "journal": "Journal Name",
+    "title": "KSHV endothelial cell infection dynamics in guinea pigs",
+    "authors": "Stanfield BA, Fida K, Tan T, Anderson A",
+    "journal": "Preprint",
     "year": 2025,
-    "doi": "10.0000/example.doi",
+    "doi": "",
     "url": ""
   },
   {
-    "title": "Another study on guinea-pig models",
-    "authors": "Smith A, Fida K, Tan T",
-    "journal": "Preprint",
+    "title": "Guinea-pig models of virus-associated cancers",
+    "authors": "Stanfield BA, Wood C",
+    "journal": "Journal of Translational Virology",
     "year": 2024,
-    "doi": "",
-    "url": "https://example.org/preprint.pdf"
+    "doi": "10.0000/example.doi",
+    "url": ""
   }
 ]

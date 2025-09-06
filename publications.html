@@ -1,1 +1,67 @@
-<h1>Publications</h1><p>Publications list driven by publications.json.</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
+  <title>Publications • Stanfield Lab</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="container header-wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/lsu-wordmark.svg" alt="LSU School of Veterinary Medicine" class="brand-img">
+      <span class="brand-text">Stanfield Lab</span>
+    </a>
+    <nav aria-label="Primary">
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+      <ul id="primaryNav" class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="people.html">People</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="opportunities.html">Opportunities</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+
+  <main id="main" class="container">
+<h1>Publications</h1>
+<div class="pub-toolbar">
+  <input id="pubSearch" type="search" placeholder="Search by title, author, year…" aria-label="Search publications">
+  <select id="pubYearFilter" aria-label="Filter by year"></select>
+</div>
+<ol id="pubList" class="pub-list" aria-live="polite"></ol>
+<p class="muted">Manage publications in <code>assets/publications.json</code>. Supports title, authors, journal, year, doi, and url.</p>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-grid">
+    <div>
+      <h3>Stanfield Lab</h3>
+      <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+    </div>
+    <div>
+      <h4>Find us</h4>
+      <p>LSU School of Veterinary Medicine<br>Baton Rouge, LA 70803</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
+  </div>
+  <script src="assets/script.js"></script>
+</footer>
+
+</body>
+</html>

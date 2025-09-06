@@ -2,18 +2,22 @@
   {
     "name": "Brent A. Stanfield, Ph.D.",
     "role": "Assistant Professor, Viral Oncology (PI)",
-    "email": "bstanf5@lsu.edu"
+    "email": "bstanf5@lsu.edu",
+    "photo": ""
   },
   {
     "name": "Kiran Fida",
-    "role": "Ph.D. Student"
+    "role": "Ph.D. Student",
+    "photo": ""
   },
   {
     "name": "Tan",
-    "role": "Ph.D. Student"
+    "role": "Ph.D. Student",
+    "photo": ""
   },
   {
     "name": "Amber Anderson",
-    "role": "Graduate Student"
+    "role": "Graduate Student",
+    "photo": ""
   }
 ]
