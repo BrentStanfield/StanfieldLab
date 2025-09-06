@@ -109,4 +109,17 @@ a:hover { text-decoration: underline; }
     border-radius: 10px;
   }
   .nav-list.open { display: flex; }
+  .footer-grid a {
+  color: var(--purple);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-grid a:hover {
+  text-decoration: underline;
+}
+.footer-grid p {
+  margin: 0.25rem 0;
+  line-height: 1.5;
+}
+
 }
