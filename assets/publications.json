@@ -1,82 +1,18 @@
 [
   {
-    "title": "Guinea Pig X Virus Is a Gammaherpesvirus",
-    "authors": "Truong VNY; Ellis R; Stanfield BA",
-    "journal": "Viruses",
+    "title": "KSHV endothelial cell infection dynamics in guinea pigs",
+    "authors": "Stanfield BA, Fida K, Tan T, Anderson A",
+    "journal": "Preprint",
     "year": 2025,
-    "doi": "10.3390/v17081084",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/40872798/"
+    "doi": "",
+    "url": ""
   },
   {
-    "title": "Small Animal Models to Study Herpes Simplex Virus Infections",
-    "authors": "Hussain MT; Stanfield BA; Bernstein DI",
-    "journal": "Viruses",
+    "title": "Guinea-pig models of virus-associated cancers",
+    "authors": "Stanfield BA, Wood C",
+    "journal": "Journal of Translational Virology",
     "year": 2024,
-    "doi": "10.3390/v16071037",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/39066200/"
-  },
-  {
-    "title": "Guinea pig herpes like virus is a gamma herpesvirus",
-    "authors": "Stanfield BA; Ruiz E; Chouljenko VN; Kousoulas KG",
-    "journal": "Virus Genes",
-    "year": 2024,
-    "doi": "10.1007/s11262-024-02054-x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/38340271/"
-  },
-  {
-    "title": "Unlocking the Potential of Kinase Targets in Cancer: Insights from CancerOmicsNet, an AI-Driven Approach to Drug Response Prediction in Cancer",
-    "authors": "Singha M; Pu L; Srivastava G; Ni X; Stanfield BA; Uche IK; Rider PJF; Kousoulas KG; Ramanujam J; Brylinski M",
-    "journal": "Cancers (Basel)",
-    "year": 2023,
-    "doi": "10.3390/cancers15164050",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/37627077/"
-  },
-  {
-    "title": "Artificial intelligence to guide precision anticancer therapy with multitargeted kinase inhibitors",
-    "authors": "Singha M; Pu L; Stanfield BA; Uche IK; Rider PJF; Kousoulas KG; Ramanujam J; Brylinski M",
-    "journal": "BMC Cancer",
-    "year": 2022,
-    "doi": "10.1186/s12885-022-10293-0",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/36434556/"
-  },
-  {
-    "title": "Utility of a Recombinant HSV-1 Vaccine Vector for Personalized Cancer Vaccines",
-    "authors": "Uche IK; Stanfield BA; Rudd JS; Kousoulas KG; Rider PJF",
-    "journal": "Frontiers in Molecular Biosciences",
-    "year": 2022,
-    "doi": "10.3389/fmolb.2022.832393",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/35155582/"
-  },
-  {
-    "title": "Development of a mouse salivary gland-derived mesenchymal cell line for immunological studies of murine cytomegalovirus",
-    "authors": "White TM; Stanfield BA; Bonavita CM; Rudd JS; Cardin RD",
-    "journal": "PLoS One",
-    "year": 2022,
-    "doi": "10.1371/journal.pone.0265479",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/35976883/"
-  },
-  {
-    "title": "Rational Design of Live-Attenuated Vaccines against Herpes Simplex Viruses",
-    "authors": "Stanfield BA; Kousoulas KG; Fernandez A; Gershburg E",
-    "journal": "Viruses",
-    "year": 2021,
-    "doi": "10.3390/v13081637",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/34452501/"
-  },
-  {
-    "title": "Paramyxovirus-Like Particles as Protein Delivery Vehicles",
-    "authors": "Panthi S; Schmitt PT; Lorenz FJ; Stanfield BA; Schmitt AP",
-    "journal": "Journal of Virology",
-    "year": 2021,
-    "doi": "10.1128/JVI.01030-21",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/34379508/"
-  },
-  {
-    "title": "Recent advances in understanding Epstein-Barr virus",
-    "authors": "Stanfield BA; Luftig MA",
-    "journal": "F1000Research",
-    "year": 2017,
-    "doi": "10.12688/f1000research.10591.1",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/28408983/"
+    "doi": "10.0000/example.doi",
+    "url": ""
   }
 ]

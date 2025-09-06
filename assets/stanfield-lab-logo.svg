@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" viewBox="0 0 640 160">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FDD023" />
+      <stop offset="100%" stop-color="#ffe98a" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="white"/>
+  <circle cx="70" cy="80" r="68" fill="none" stroke="#461D7C" stroke-width="2" opacity="0.2"/>
+  <circle cx="70" cy="80" r="52" fill="none" stroke="#461D7C" stroke-width="2" opacity="0.25"/>
+  <polygon points="70,30 98,46 98,78 70,94 42,78 42,46" fill="none" stroke="#461D7C" stroke-width="2" opacity="0.5"/>
+  <circle cx="70" cy="62" r="8" fill="#461D7C" opacity="0.9"/>
+  <path d="M26,98 q18,-22 50,-18 q22,2 34,12 q6,5 6,12 q0,9 -9,14 q-9,6 -26,6 q-28,0 -55,-26z"
+        fill="url(#g1)" opacity="0.9"/>
+  <path d="M44,40 C68,20 94,24 110,46
+           M44,40 C58,58 86,62 110,46"
+        fill="none" stroke="#461D7C" stroke-width="2" opacity="0.6"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="150" y="88" font-size="44" font-weight="800" fill="#461D7C">Stanfield Lab</text>
+  </g>
+</svg>
