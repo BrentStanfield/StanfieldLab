@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Title of a relevant paper",
+    "authors": "Doe J, Stanfield BA",
+    "journal": "Journal Name",
+    "year": 2025,
+    "doi": "10.0000/example.doi",
+    "url": ""
+  },
+  {
+    "title": "Another study on guinea-pig models",
+    "authors": "Smith A, Fida K, Tan T",
+    "journal": "Preprint",
+    "year": 2024,
+    "doi": "",
+    "url": "https://example.org/preprint.pdf"
+  }
+]
