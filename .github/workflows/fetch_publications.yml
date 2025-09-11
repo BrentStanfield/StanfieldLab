@@ -1,0 +1,25 @@
+name: Fetch Publications
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-publications:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Specify the Python version needed
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Adjust if you have specific dependencies
+
+      - name: Run fetch_pubmed script
+        run: |
+          python tools/fetch_pubmed.py  # Run the script to fetch publications
