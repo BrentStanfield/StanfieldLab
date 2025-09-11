@@ -1,10 +1,1 @@
-[
-  {
-    "title": "(placeholder) Replace by PubMed sync",
-    "authors": "\u2014",
-    "journal": "",
-    "year": null,
-    "doi": "",
-    "url": ""
-  }
-]
+{"publications": [{"title": "A New Study on XYZ", "author": "John Doe", "year": 2023, "journal": "Journal of Research", "link": "http://example.com"}]}
