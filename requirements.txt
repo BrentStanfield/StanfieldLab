@@ -1,0 +1,5 @@
+# No external dependencies
+
+# Specify Python version
+# This script is compatible with Python 3.7 and above
+python_version >= "3.7"
