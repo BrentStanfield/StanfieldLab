@@ -11,59 +11,175 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" role="banner">
-  <div class="container header-wrap">
-    <a class="brand" href="index.html" aria-label="Stanfield Lab home">
-      <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
-    </a>
-    <nav aria-label="Primary">
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-      <ul id="primaryNav" class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">People</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="opportunities.html">Opportunities</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
-  </div>
-</header>
+  <header class="site-header" role="banner">
+    <div class="container header-wrap">
+      <a class="brand" href="index.html" aria-label="Stanfield Lab home">
+        <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
+      </a>
+      <nav aria-label="Primary">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul id="primaryNav" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html" aria-current="page">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="opportunities.html">Opportunities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
 
   <main id="main" class="container">
-<h1>People</h1>
-<div id="peopleGrid" class="cards-people" aria-live="polite"></div>
-<p class="muted">Edit <code>assets/people.json</code> to update this page.</p>
-</main>
+    <h1>People</h1>
+    <div class="pub-toolbar" style="margin-bottom:1rem;">
+      <input id="peopleSearch" type="search" placeholder="Search by name or role…" aria-label="Search people">
+      <select id="roleFilter" aria-label="Filter by role"></select>
+    </div>
 
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+    <div id="peopleGrid" class="cards-people" aria-live="polite"></div>
+
+    <script>
+      // People loader (robust to different JSON shapes/fields)
+      async function loadPeople() {
+        const grid = document.getElementById('peopleGrid');
+        const searchInput = document.getElementById('peopleSearch');
+        const roleFilter = document.getElementById('roleFilter');
+        let people = [];
+
+        try {
+          const res = await fetch('assets/people.json', { cache: 'no-store' });
+          const data = await res.json();
+
+          // Accept either an array or { people: [...] }
+          const raw = Array.isArray(data) ? data
+                    : (Array.isArray(data.people) ? data.people : []);
+
+          // Normalize fields
+          people = raw.map(p => ({
+            name: p.name || '',
+            role: p.role || '',
+            email: p.email || '',
+            photo: p.photo || '',
+            website: p.website || '',
+            scholar: p.scholar || '',
+            github: p.github || '',
+            twitter: p.twitter || '',
+            linkedin: p.linkedin || ''
+          }));
+
+          // Sort: PI/Professor first, then others alphabetically by role then name
+          const piFirst = (r) => /prof|pi|director/i.test(r);
+          people.sort((a, b) => {
+            const aPI = piFirst(a.role), bPI = piFirst(b.role);
+            if (aPI !== bPI) return aPI ? -1 : 1;
+            const roleCmp = (a.role || '').localeCompare(b.role || '');
+            return roleCmp !== 0 ? roleCmp : (a.name || '').localeCompare(b.name || '');
+          });
+
+        } catch (e) {
+          grid.innerHTML = '<p class="error">Could not load people.</p>';
+          return;
+        }
+
+        // Build role filter options
+        const roles = Array.from(new Set(people.map(p => p.role).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+        roleFilter.innerHTML = '<option value="">All roles</option>' + roles.map(r => `<option value="${r}">${r}</option>`).join('');
+
+        function linkIcon(href, label) {
+          if (!href) return '';
+          const safe = String(href);
+          return `<a href="${safe}" target="_blank" rel="noopener" aria-label="${label}">${label}</a>`;
+        }
+
+        function formatCard(p) {
+          // Optional photo
+          const photoBlock = p.photo
+            ? `<img class="person-photo" src="${p.photo}" alt="Photo of ${p.name}">`
+            : '';
+
+          // Optional links row
+          const links = [
+            p.website && linkIcon(p.website, 'Website'),
+            p.scholar && linkIcon(p.scholar, 'Scholar'),
+            p.github && linkIcon(p.github, 'GitHub'),
+            p.twitter && linkIcon(p.twitter, 'Twitter'),
+            p.linkedin && linkIcon(p.linkedin, 'LinkedIn')
+          ].filter(Boolean).join(' • ');
+
+          return `
+            <article class="card person">
+              ${photoBlock}
+              <div class="person-body">
+                <h3 class="person-name">${p.name}</h3>
+                <p class="person-role">${p.role}</p>
+                ${p.email ? `<p class="person-email"><a href="mailto:${p.email}">${p.email}</a></p>` : ''}
+                ${links ? `<p class="person-links">${links}</p>` : ''}
+              </div>
+            </article>
+          `;
+        }
+
+        function render(list) {
+          grid.innerHTML = list.length
+            ? list.map(formatCard).join('')
+            : '<p class="muted">No people match your filters.</p>';
+        }
+
+        function filterAndRender() {
+          const q = searchInput.value.trim().toLowerCase();
+          const role = roleFilter.value;
+          let filtered = people;
+          if (role) filtered = filtered.filter(p => p.role === role);
+          if (q) {
+            filtered = filtered.filter(p =>
+              (p.name && p.name.toLowerCase().includes(q)) ||
+              (p.role && p.role.toLowerCase().includes(q)) ||
+              (p.email && p.email.toLowerCase().includes(q))
+            );
+          }
+          render(filtered);
+        }
+
+        searchInput.addEventListener('input', filterAndRender);
+        roleFilter.addEventListener('change', filterAndRender);
+
+        // Initial render
+        render(people);
+      }
+
+      document.addEventListener('DOMContentLoaded', loadPeople);
+    </script>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+        <div>
+          <h3>Stanfield Lab</h3>
+          <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        </div>
+      </div>
       <div>
-        <h3>Stanfield Lab</h3>
-        <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        <h4>Find us</h4>
+        <p>
+          <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
+          Baton Rouge, LA 70803
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
       </div>
     </div>
-    <div>
-      <h4>Find us</h4>
-      <p>
-        <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
-        Baton Rouge, LA 70803
-      </p>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
     </div>
-    <div>
-      <h4>Contact</h4>
-      <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
-  </div>
-  <script src="assets/script.js"></script>
-</footer>
+    <script src="assets/script.js"></script>
+  </footer>
 
 </body>
 </html>
