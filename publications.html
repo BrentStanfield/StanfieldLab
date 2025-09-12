@@ -49,7 +49,10 @@
 </div>
 <ol id="pubList" class="pub-list" aria-live="polite"></ol>
 
-<p class="muted">To resync from PubMed automatically, see <code>tools/fetch_pubmed.py</code> and the GitHub Action in <code>.github/workflows/sync_pubmed.yml</code>.</p>
+<p class="muted">
+  Publications are loaded directly from <code>assets/publications.json</code>.
+  To update, simply edit the JSON file.
+</p>
 </main>
 
 <footer class="site-footer" role="contentinfo">
@@ -77,6 +80,71 @@
     <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
   </div>
   <script src="assets/script.js"></script>
+  <script>
+    // Publications loader
+    async function loadPublications() {
+      const pubList = document.getElementById('pubList');
+      const pubYearFilter = document.getElementById('pubYearFilter');
+      const pubSearch = document.getElementById('pubSearch');
+      let publications = [];
+
+      // Fetch publications.json
+      try {
+        const res = await fetch('assets/publications.json');
+        publications = await res.json();
+      } catch (e) {
+        pubList.innerHTML = '<li class="error">Could not load publications.</li>';
+        return;
+      }
+
+      // Helper: Format publication entry
+      function formatPub(pub) {
+        // Basic expected fields: title, authors, journal, year, link
+        return `
+          <li>
+            <span class="pub-title">${pub.title}</span><br>
+            <span class="pub-authors">${pub.authors}</span>
+            <span class="pub-journal">${pub.journal ? ' • ' + pub.journal : ''}</span>
+            <span class="pub-year">${pub.year ? ' • ' + pub.year : ''}</span>
+            ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener">[Link]</a>` : ''}
+          </li>
+        `;
+      }
+
+      // Helper: Render list
+      function renderList(list) {
+        pubList.innerHTML = list.map(formatPub).join('');
+      }
+
+      // Year filter setup
+      const years = Array.from(new Set(publications.map(pub => pub.year).filter(Boolean))).sort((a, b) => b - a);
+      pubYearFilter.innerHTML = `<option value="">All years</option>` +
+        years.map(y => `<option value="${y}">${y}</option>`).join('');
+
+      // Search and filter
+      function filterAndRender() {
+        const search = pubSearch.value.trim().toLowerCase();
+        const year = pubYearFilter.value;
+        let filtered = publications;
+        if (year) filtered = filtered.filter(pub => String(pub.year) === year);
+        if (search) {
+          filtered = filtered.filter(pub =>
+            (pub.title && pub.title.toLowerCase().includes(search)) ||
+            (pub.authors && pub.authors.toLowerCase().includes(search)) ||
+            (pub.year && String(pub.year).includes(search))
+          );
+        }
+        renderList(filtered);
+      }
+
+      pubSearch.addEventListener('input', filterAndRender);
+      pubYearFilter.addEventListener('change', filterAndRender);
+
+      renderList(publications);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPublications);
+  </script>
 </footer>
 
 </body>
