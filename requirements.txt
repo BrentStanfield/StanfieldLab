@@ -1,5 +1,5 @@
 # No external dependencies
 
-# Specify Python version
+# Specify Python version compatibility
 # This script is compatible with Python 3.7 and above
-python_version >= "3.7"
+# Documented in a comment as requirements.txt doesn't directly support Python version constraints.
