@@ -34,6 +34,7 @@
 
   <main id="main" class="container">
     <h1>People</h1>
+
     <div class="pub-toolbar" style="margin-bottom:1rem;">
       <input id="peopleSearch" type="search" placeholder="Search by name or role…" aria-label="Search people">
       <select id="roleFilter" aria-label="Filter by role"></select>
@@ -42,49 +43,67 @@
     <div id="peopleGrid" class="cards-people" aria-live="polite"></div>
 
     <script>
-      // People loader (robust to different JSON shapes/fields)
       async function loadPeople() {
         const grid = document.getElementById('peopleGrid');
         const searchInput = document.getElementById('peopleSearch');
         const roleFilter = document.getElementById('roleFilter');
         let people = [];
 
+        function showError(msg) {
+          grid.innerHTML = `<p class="error" style="color:crimson;">${msg}</p>`;
+        }
+
         try {
-          const res = await fetch('assets/people.json', { cache: 'no-store' });
-          const data = await res.json();
+          const res = await fetch('assets/people.json?v=' + Date.now(), { cache: 'no-store' });
+          if (!res.ok) throw new Error(`HTTP ${res.status} loading people.json`);
+          const text = await res.text();
 
-          // Accept either an array or { people: [...] }
+          if (text.trim().startsWith('<')) {
+            throw new Error('Expected JSON but received HTML (check path or 404).');
+          }
+
+          const data = JSON.parse(text);
           const raw = Array.isArray(data) ? data
-                    : (Array.isArray(data.people) ? data.people : []);
+                    : (Array.isArray(data.people) ? data.people : null);
+          if (!raw) throw new Error('people.json must be an array or { "people": [...] }.');
 
-          // Normalize fields
-          people = raw.map(p => ({
-            name: p.name || '',
-            role: p.role || '',
-            email: p.email || '',
-            photo: p.photo || '',
-            website: p.website || '',
-            scholar: p.scholar || '',
-            github: p.github || '',
-            twitter: p.twitter || '',
-            linkedin: p.linkedin || ''
-          }));
+          people = raw.map((p, i) => {
+            if (!p || typeof p !== 'object') {
+              console.warn('Bad entry at index', i, p);
+              return { name: '', role: '', email: '' };
+            }
+            return {
+              name: p.name || '',
+              role: p.role || '',
+              email: p.email || '',
+              photo: p.photo || '',
+              website: p.website || '',
+              scholar: p.scholar || '',
+              github: p.github || '',
+              twitter: p.twitter || '',
+              linkedin: p.linkedin || ''
+            };
+          });
 
-          // Sort: PI/Professor first, then others alphabetically by role then name
-          const piFirst = (r) => /prof|pi|director/i.test(r);
+          const bad = people.findIndex(p => !p.name);
+          if (bad !== -1) {
+            console.warn('Entry missing "name" at index', bad, raw[bad]);
+          }
+
+          const isPI = r => /prof|pi|director/i.test(r);
           people.sort((a, b) => {
-            const aPI = piFirst(a.role), bPI = piFirst(b.role);
+            const aPI = isPI(a.role), bPI = isPI(b.role);
             if (aPI !== bPI) return aPI ? -1 : 1;
             const roleCmp = (a.role || '').localeCompare(b.role || '');
             return roleCmp !== 0 ? roleCmp : (a.name || '').localeCompare(b.name || '');
           });
 
-        } catch (e) {
-          grid.innerHTML = '<p class="error">Could not load people.</p>';
+        } catch (err) {
+          console.error(err);
+          showError('Could not load people: ' + err.message);
           return;
         }
 
-        // Build role filter options
         const roles = Array.from(new Set(people.map(p => p.role).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
         roleFilter.innerHTML = '<option value="">All roles</option>' + roles.map(r => `<option value="${r}">${r}</option>`).join('');
 
@@ -95,12 +114,7 @@
         }
 
         function formatCard(p) {
-          // Optional photo
-          const photoBlock = p.photo
-            ? `<img class="person-photo" src="${p.photo}" alt="Photo of ${p.name}">`
-            : '';
-
-          // Optional links row
+          const photo = p.photo ? `<img class="person-photo" src="${p.photo}" alt="Photo of ${p.name}">` : '';
           const links = [
             p.website && linkIcon(p.website, 'Website'),
             p.scholar && linkIcon(p.scholar, 'Scholar'),
@@ -111,7 +125,7 @@
 
           return `
             <article class="card person">
-              ${photoBlock}
+              ${photo}
               <div class="person-body">
                 <h3 class="person-name">${p.name}</h3>
                 <p class="person-role">${p.role}</p>
@@ -146,7 +160,6 @@
         searchInput.addEventListener('input', filterAndRender);
         roleFilter.addEventListener('change', filterAndRender);
 
-        // Initial render
         render(people);
       }
 
