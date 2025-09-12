@@ -1,1 +1,165 @@
-{"publications": [{"title": "A New Study on XYZ", "author": "John Doe", "year": 2023, "journal": "Journal of Research", "link": "http://example.com"}]}
+{
+  "publications": [
+    {
+      "title": "Guinea Pig X Virus Is a Gammaherpesvirus",
+      "author": "Truong VNY, Ellis R, Stanfield BA",
+      "year": 2025,
+      "journal": "Viruses",
+      "link": "https://doi.org/10.3390/v17081084"
+    },
+    {
+      "title": "A new era in gammaherpesvirus transcriptomics: high-resolution profiling and model development",
+      "author": "Fida K, Stanfield BA",
+      "year": 2025,
+      "journal": "mSystems",
+      "link": "https://doi.org/10.1128/msystems.00208-25"
+    },
+    {
+      "title": "A Repetitive Acipenser gueldenstaedtii Genomic Region Aligning with the Acipenser baerii IGLV Gene Cluster Suggests a Role as a Transcription Termination Element Across Several Sturgeon Species",
+      "author": "Chouljenko AV, Stanfield BA, Melnyk TO, Dutta O, Chouljenko VN",
+      "year": 2024,
+      "journal": "Int J Mol Sci",
+      "link": "https://doi.org/10.3390/ijms252312685"
+    },
+    {
+      "title": "Small Animal Models to Study Herpes Simplex Virus Infections",
+      "author": "Hussain MT, Stanfield BA, Bernstein DI",
+      "year": 2024,
+      "journal": "Viruses",
+      "link": "https://doi.org/10.3390/v16071037"
+    },
+    {
+      "title": "Guinea pig herpes like virus is a gamma herpesvirus",
+      "author": "Stanfield BA, Ruiz E, Chouljenko VN, Kousoulas KG",
+      "year": 2024,
+      "journal": "Virus Genes",
+      "link": "https://doi.org/10.1007/s11262-024-02054-x"
+    },
+    {
+      "title": "Unlocking the Potential of Kinase Targets in Cancer: Insights from CancerOmicsNet, an AI-Driven Approach to Drug Response Prediction in Cancer",
+      "author": "Singha M, Pu L, Srivastava G, Ni X, Stanfield BA, Uche IK, Rider PJF, Kousoulas KG, Ramanujam J, Brylinski M",
+      "year": 2023,
+      "journal": "Cancers (Basel)",
+      "link": "https://doi.org/10.3390/cancers15164050"
+    },
+    {
+      "title": "The CMV-encoded G protein-coupled receptors M33 and US28 play pleiotropic roles in immune evasion and alter host T cell responses",
+      "author": "White TM, Bonavita CM, Stanfield BA, Farrell HE, Davis-Poynter NJ, Cardin RD",
+      "year": 2022,
+      "journal": "Front Immunol",
+      "link": "https://doi.org/10.3389/fimmu.2022.1047299"
+    },
+    {
+      "title": "Artificial intelligence to guide precision anticancer therapy with multitargeted kinase inhibitors",
+      "author": "Singha M, Pu L, Stanfield BA, Uche IK, Rider PJF, Kousoulas KG, Ramanujam J, Brylinski M",
+      "year": 2022,
+      "journal": "BMC Cancer",
+      "link": "https://doi.org/10.1186/s12885-022-10293-0"
+    },
+    {
+      "title": "Cross protective efficacy of the Non-Neurotropic live attenuated herpes simplex virus type 1 vaccine VC-2 is enhanced by intradermal vaccination and deletion of glycoprotein G",
+      "author": "Stanfield BA, Bravo FJ, Dixon DA, Chouljenko VN, Kousoulas KG, Bernstein DI",
+      "year": 2022,
+      "journal": "Vaccine",
+      "link": "https://doi.org/10.1016/j.vaccine.2022.09.015"
+    },
+    {
+      "title": "Development of a mouse salivary gland-derived mesenchymal cell line for immunological studies of murine cytomegalovirus",
+      "author": "White TM, Stanfield BA, Bonavita CM, Rudd JS, Cardin RD",
+      "year": 2022,
+      "journal": "PLoS One",
+      "link": "https://doi.org/10.1371/journal.pone.0265479"
+    },
+    {
+      "title": "Utility of a Recombinant HSV-1 Vaccine Vector for Personalized Cancer Vaccines",
+      "author": "Uche IK, Stanfield BA, Rudd JS, Kousoulas KG, Rider PJF",
+      "year": 2022,
+      "journal": "Front Mol Biosci",
+      "link": "https://doi.org/10.3389/fmolb.2022.832393"
+    },
+    {
+      "title": "Characterization of murine cytomegalovirus infection and induction of calcification in Murine Aortic Vascular Smooth Muscle Cells (MOVAS)",
+      "author": "Bonavita CM, White TM, Stanfield BA, Cardin RD",
+      "year": 2021,
+      "journal": "J Virol Methods",
+      "link": "https://doi.org/10.1016/j.jviromet.2021.114270"
+    },
+    {
+      "title": "Rational Design of Live-Attenuated Vaccines against Herpes Simplex Viruses",
+      "author": "Stanfield BA, Kousoulas KG, Fernandez A, Gershburg E",
+      "year": 2021,
+      "journal": "Viruses",
+      "link": "https://doi.org/10.3390/v13081637"
+    },
+    {
+      "title": "Paramyxovirus-Like Particles as Protein Delivery Vehicles",
+      "author": "Panthi S, Schmitt PT, Lorenz FJ, Stanfield BA, Schmitt AP",
+      "year": 2021,
+      "journal": "J Virol",
+      "link": "https://doi.org/10.1128/JVI.01030-21"
+    },
+    {
+      "title": "IL-10 and class 1 histone deacetylases act synergistically and independently on the secretion of proinflammatory mediators in alveolar macrophages",
+      "author": "Stanfield BA, Purves T, Palmer S, Sullenger B, Welty-Wolf K, Haines K, Agarwal S, Kasotakis G",
+      "year": 2021,
+      "journal": "PLoS One",
+      "link": "https://doi.org/10.1371/journal.pone.0245169"
+    },
+    {
+      "title": "Intramuscular vaccination of mice with the human herpes simplex virus type-1(HSV-1) VC2 vaccine, but not its parental strain HSV-1(F) confers full protection against lethal ocular HSV-1 (McKrae) pathogenesis",
+      "author": "Naidu SK, Nabi R, Cheemarla NR, Stanfield BA, Rider PJ, Jambunathan N, Chouljenko VN, Carter R, Del Piero F, Langohr I, Kousoulas KG",
+      "year": 2020,
+      "journal": "PLoS One",
+      "link": "https://doi.org/10.1371/journal.pone.0228252"
+    },
+    {
+      "title": "Intramuscular vaccination of guinea pigs with the live-attenuated human herpes simplex vaccine VC2 stimulates a transcriptional profile of vaginal Th17 and regulatory Tr1 responses",
+      "author": "Stanfield BA, Rider PJF, Caskey J, Del Piero F, Kousoulas KG",
+      "year": 2018,
+      "journal": "Vaccine",
+      "link": "https://doi.org/10.1016/j.vaccine.2018.03.075"
+    },
+    {
+      "title": "Recent advances in understanding Epstein-Barr virus",
+      "author": "Stanfield BA, Luftig MA",
+      "year": 2017,
+      "journal": "F1000Res",
+      "link": "https://doi.org/10.12688/f1000research.10591.1"
+    },
+    {
+      "title": "Intramuscular Immunization of Mice with the Live-Attenuated Herpes Simplex Virus 1 Vaccine Strain VC2 Expressing Equine Herpesvirus 1 (EHV-1) Glycoprotein D Generates Anti-EHV-1 Immune Responses in Mice",
+      "author": "Liu SA, Stanfield BA, Chouljenko VN, Naidu S, Langohr I, Del Piero F, Ferracone J, Roy AA, Kousoulas KG",
+      "year": 2017,
+      "journal": "J Virol",
+      "link": "https://doi.org/10.1128/JVI.02445-16"
+    },
+    {
+      "title": "Vaccination of rhesus macaques with the live-attenuated HSV-1 vaccine VC2 stimulates the proliferation of mucosal T cells and germinal center responses resulting in sustained production of highly neutralizing antibodies",
+      "author": "Stanfield BA, Pahar B, Chouljenko VN, Veazey R, Kousoulas KG",
+      "year": 2017,
+      "journal": "Vaccine",
+      "link": "https://doi.org/10.1016/j.vaccine.2016.12.018"
+    },
+    {
+      "title": "A single intramuscular vaccination of mice with the HSV-1 VC2 virus with mutations in the glycoprotein K and the membrane protein UL20 confers full protection against lethal intravaginal challenge with virulent HSV-1 and HSV-2 strains",
+      "author": "Stanfield BA, Stahl J, Chouljenko VN, Subramanian R, Charles AS, Saied AA, Walker JD, Kousoulas KG",
+      "year": 2014,
+      "journal": "PLoS One",
+      "link": "https://doi.org/10.1371/journal.pone.0109890"
+    },
+    {
+      "title": "Equine herpesvirus type 1-mediated oncolysis of human glioblastoma multiforme cells",
+      "author": "Courchesne MJ, White MC, Stanfield BA, Frampton AR Jr",
+      "year": 2012,
+      "journal": "J Virol",
+      "link": "https://doi.org/10.1128/JVI.06296-11"
+    },
+    {
+      "title": "A New Study on XYZ",
+      "author": "John Doe",
+      "year": 2023,
+      "journal": "Journal of Research",
+      "link": "http://example.com"
+    }
+  ]
+}
