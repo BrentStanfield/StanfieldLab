@@ -7,6 +7,33 @@
   <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    /* Uniform portrait sizing */
+    .person-photo {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;     /* crop to fill, no distortion */
+      border-radius: 50%;    /* circle avatars */
+      display: block;
+      margin: 0 auto 1rem;   /* center in card */
+    }
+    /* Optional: tighten person cards a bit */
+    .cards-people {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .card.person {
+      padding: 1rem;
+      border: 1px solid var(--border, #e5e7eb);
+      border-radius: 12px;
+      background: var(--card, #fff);
+    }
+    .person-body { text-align: center; }
+    .person-name { margin: 0 0 .25rem; }
+    .person-role { margin: 0 0 .25rem; font-size: .95rem; opacity: .9; }
+    .person-email, .person-links { margin: 0; font-size: .9rem; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -86,9 +113,7 @@
           });
 
           const bad = people.findIndex(p => !p.name);
-          if (bad !== -1) {
-            console.warn('Entry missing "name" at index', bad, raw[bad]);
-          }
+          if (bad !== -1) console.warn('Entry missing "name" at index', bad, raw[bad]);
 
           const isPI = r => /prof|pi|director/i.test(r);
           people.sort((a, b) => {
