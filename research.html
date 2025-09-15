@@ -34,6 +34,172 @@
 
 <main id="main" class="container">
   <h1>Research</h1>
+<!-- Drop this right under your first paragraph in research.html -->
+<figure class="research-graphic innate-fig" role="group" aria-labelledby="fig-innate-title fig-innate-desc">
+  <svg viewBox="0 0 1100 560" xmlns="http://www.w3.org/2000/svg" aria-describedby="fig-innate-desc">
+    <title id="fig-innate-title">Innate sensing via MDA5 → MAVS → IRF7: activation in guinea pig vs KSHV suppression in human</title>
+    <desc id="fig-innate-desc">
+      Left panel (Guinea Pig): dsRNA sensed by MDA5 signals through MAVS to IRF7 and IFN. KSHV antagonists may be ineffective due to miRNA seed mismatch in gpIFIH1 and vIRF-3
+      binding interface divergence with gpIRF7. Right panel (Human): KSHV miRNA represses MDA5/IFIH1 transcripts and vIRF-3 (K10.5) inhibits IRF7, dampening IFN output.
+    </desc>
+
+    <!-- ========== MARKERS ========== -->
+    <defs>
+      <!-- Arrow for activation -->
+      <marker id="arrow-activ" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1fb6ff"/>
+      </marker>
+      <!-- Arrow for neutral/gray flow -->
+      <marker id="arrow-neutral" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#9aa3af"/>
+      </marker>
+      <!-- Blunt inhibitor (T-bar) -->
+      <marker id="tbar" viewBox="0 0 12 12" refX="2" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+        <path d="M2 0 V12" stroke="#ef4444" stroke-width="3"/>
+      </marker>
+      <!-- Pill/capsule node -->
+      <linearGradient id="node-grad" x1="0" x2="1" y1="0" y2="1">
+        <stop offset="0%" stop-color="#0ea5e9"/>
+        <stop offset="100%" stop-color="#2dd4bf"/>
+      </linearGradient>
+      <!-- Soft shadow -->
+      <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity="0.12"/>
+      </filter>
+    </defs>
+
+    <!-- ========== PANELS ========== -->
+    <!-- Left panel background -->
+    <rect x="30" y="70" width="500" height="420" rx="18" fill="#f0f9ff" stroke="#94a3b8"/>
+    <text x="280" y="50" text-anchor="middle" font-size="28" font-weight="700" fill="#0f172a">Guinea Pig</text>
+
+    <!-- Right panel background -->
+    <rect x="570" y="70" width="500" height="420" rx="18" fill="#f8fafc" stroke="#94a3b8"/>
+    <text x="820" y="50" text-anchor="middle" font-size="28" font-weight="700" fill="#0f172a">Human</text>
+
+    <!-- Panel divider -->
+    <line x1="550" y1="70" x2="550" y2="490" stroke="#94a3b8" stroke-width="2"/>
+
+    <!-- ========== LEFT: GUINEA PIG (ACTIVE) ========== -->
+    <!-- Labels -->
+    <text x="80" y="110" font-size="16" fill="#334155">dsRNA (viral)</text>
+
+    <!-- dsRNA icon -->
+    <path d="M90 130 C110 120,130 140,150 130
+             M90 140 C110 130,130 150,150 140"
+          stroke="#2563eb" stroke-width="3" fill="none"/>
+
+    <!-- Nodes: MDA5, MAVS, IRF7, IFN -->
+    <!-- Node helper: rounded pill -->
+    <!-- MDA5 -->
+    <g filter="url(#soft)">
+      <rect x="210" y="120" width="120" height="40" rx="20" fill="url(#node-grad)"/>
+      <text x="270" y="146" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">MDA5</text>
+    </g>
+    <!-- MAVS -->
+    <g filter="url(#soft)">
+      <rect x="210" y="210" width="120" height="40" rx="20" fill="url(#node-grad)"/>
+      <text x="270" y="236" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">MAVS</text>
+    </g>
+    <!-- IRF7 -->
+    <g filter="url(#soft)">
+      <rect x="210" y="300" width="120" height="40" rx="20" fill="url(#node-grad)"/>
+      <text x="270" y="326" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">IRF7</text>
+    </g>
+    <!-- IFN -->
+    <g filter="url(#soft)">
+      <rect x="210" y="390" width="120" height="40" rx="20" fill="#10b981"/>
+      <text x="270" y="416" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">IFN</text>
+    </g>
+
+    <!-- Activation arrows -->
+    <line x1="150" y1="135" x2="210" y2="140" stroke="#1fb6ff" stroke-width="6" marker-end="url(#arrow-activ)"/>
+    <line x1="270" y1="160" x2="270" y2="210" stroke="#1fb6ff" stroke-width="6" marker-end="url(#arrow-activ)"/>
+    <line x1="270" y1="250" x2="270" y2="300" stroke="#1fb6ff" stroke-width="6" marker-end="url(#arrow-activ)"/>
+    <line x1="270" y1="340" x2="270" y2="390" stroke="#1fb6ff" stroke-width="6" marker-end="url(#arrow-activ)"/>
+
+    <!-- Callouts: why antagonism may fail in guinea pig -->
+    <g>
+      <rect x="350" y="118" width="160" height="66" rx="10" fill="#ecfeff" stroke="#22d3ee"/>
+      <text x="430" y="138" text-anchor="middle" font-size="13" fill="#155e75">KSHV miRNA</text>
+      <text x="430" y="156" text-anchor="middle" font-size="12" fill="#155e75">seed mismatch in gpIFIH1</text>
+      <text x="430" y="172" text-anchor="middle" font-size="12" fill="#155e75">(&nbsp;reduced MDA5 repression&nbsp;)</text>
+      <line x1="350" y1="150" x2="330" y2="150" stroke="#22d3ee" stroke-width="3" marker-end="url(#arrow-neutral)"/>
+    </g>
+
+    <g>
+      <rect x="350" y="298" width="160" height="66" rx="10" fill="#ecfeff" stroke="#22d3ee"/>
+      <text x="430" y="318" text-anchor="middle" font-size="13" fill="#155e75">K10.5 (vIRF-3)</text>
+      <text x="430" y="336" text-anchor="middle" font-size="12" fill="#155e75">binding interface divergence</text>
+      <text x="430" y="352" text-anchor="middle" font-size="12" fill="#155e75">(&nbsp;IRF7 not efficiently inhibited&nbsp;)</text>
+      <line x1="350" y1="330" x2="330" y2="320" stroke="#22d3ee" stroke-width="3" marker-end="url(#arrow-neutral)"/>
+    </g>
+
+    <!-- ========== RIGHT: HUMAN (SUPPRESSED) ========== -->
+    <!-- dsRNA label -->
+    <text x="620" y="110" font-size="16" fill="#334155">dsRNA (viral)</text>
+    <path d="M630 130 C650 120,670 140,690 130
+             M630 140 C650 130,670 150,690 140"
+          stroke="#475569" stroke-width="3" fill="none"/>
+
+    <!-- Nodes: gray tone -->
+    <!-- MDA5 -->
+    <g filter="url(#soft)">
+      <rect x="750" y="120" width="120" height="40" rx="20" fill="#94a3b8"/>
+      <text x="810" y="146" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">MDA5</text>
+    </g>
+    <!-- MAVS -->
+    <g filter="url(#soft)">
+      <rect x="750" y="210" width="120" height="40" rx="20" fill="#94a3b8"/>
+      <text x="810" y="236" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">MAVS</text>
+    </g>
+    <!-- IRF7 -->
+    <g filter="url(#soft)">
+      <rect x="750" y="300" width="120" height="40" rx="20" fill="#94a3b8"/>
+      <text x="810" y="326" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">IRF7</text>
+    </g>
+    <!-- IFN (dim) -->
+    <g filter="url(#soft)">
+      <rect x="750" y="390" width="120" height="40" rx="20" fill="#d1d5db"/>
+      <text x="810" y="416" text-anchor="middle" font-size="18" font-weight="700" fill="#374151">IFN</text>
+    </g>
+
+    <!-- Neutral/gray flow with inhibition -->
+    <line x1="690" y1="135" x2="750" y2="140" stroke="#9aa3af" stroke-width="6" marker-end="url(#arrow-neutral)"/>
+    <line x1="810" y1="160" x2="810" y2="210" stroke="#9aa3af" stroke-width="6" marker-end="url(#arrow-neutral)"/>
+    <line x1="810" y1="250" x2="810" y2="300" stroke="#9aa3af" stroke-width="6" marker-end="url(#arrow-neutral)"/>
+    <line x1="810" y1="340" x2="810" y2="390" stroke="#9aa3af" stroke-width="6" marker-end="url(#arrow-neutral)"/>
+
+    <!-- KSHV miRNA inhibiting MDA5 transcripts -->
+    <g>
+      <rect x="900" y="112" width="170" height="70" rx="10" fill="#fee2e2" stroke="#ef4444"/>
+      <text x="985" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">KSHV miRNA</text>
+      <text x="985" y="156" text-anchor="middle" font-size="12" fill="#991b1b">targets IFIH1 (MDA5) mRNA</text>
+      <line x1="900" y1="147" x2="870" y2="147" stroke="#ef4444" stroke-width="4" marker-end="url(#tbar)"/>
+    </g>
+
+    <!-- vIRF-3 (K10.5) inhibiting IRF7 -->
+    <g>
+      <rect x="900" y="292" width="170" height="70" rx="10" fill="#fee2e2" stroke="#ef4444"/>
+      <text x="985" y="316" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">K10.5 (vIRF-3)</text>
+      <text x="985" y="336" text-anchor="middle" font-size="12" fill="#991b1b">binds & inhibits IRF7</text>
+      <line x1="900" y1="327" x2="870" y2="320" stroke="#ef4444" stroke-width="4" marker-end="url(#tbar)"/>
+    </g>
+
+  </svg>
+
+  <figcaption class="muted">
+    MDA5/RIG-I–like sensing in guinea pig vs human during KSHV infection. Left: robust activation to IFN (hypothesized reduced antagonism via miRNA seed mismatch in gpIFIH1 and
+    weaker vIRF-3 binding to gpIRF7). Right: KSHV miRNAs repress MDA5/IFIH1 transcripts and K10.5/vIRF-3 inhibits IRF7, dampening IFN output.
+  </figcaption>
+</figure>
+
+<style>
+  /* Optional styling; you can move to assets/styles.css */
+  .research-graphic { margin: 2rem auto; text-align: center; }
+  .research-graphic svg { max-width: 100%; height: auto; }
+  .research-graphic .muted { color: #555; font-size: 0.95rem; margin-top: .5rem; }
+</style>
 
   <p>
     The Stanfield Lab investigates how oncogenic herpesviruses initiate infection,
