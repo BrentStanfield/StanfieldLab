@@ -671,7 +671,7 @@
               id: 'nature-medicine',
               name: 'Nature Medicine',
               description: 'Latest medical and cancer research breakthroughs',
-              url: 'https://feeds.nature.com/nm/rss/current',
+              url: 'http://feeds.nature.com/nm/rss/current',
               api: 'rss2json',
               category: 'academic',
               color: '#8b5cf6'
@@ -680,7 +680,7 @@
               id: 'nih-cancer-dceg',
               name: 'NIH Cancer Epidemiology',
               description: 'Division of Cancer Epidemiology & Genetics research updates',
-              url: 'https://www.cancer.gov/rss/dceg.xml',
+              url: 'https://www.cancer.gov/news-events/cancer-currents-blog',
               api: 'rss2json',
               category: 'institutional',
               color: '#f59e0b'
@@ -689,20 +689,11 @@
               id: 'jvi-journal',
               name: 'Journal of Virology',
               description: 'American Society for Microbiology virology research',
-              url: 'https://journals.asm.org/action/showFeed?type=etoc&feed=rss&jc=jvi',
+              url: 'https://journals.asm.org/loi/jvi?af=R',
               api: 'rss2json',
               category: 'academic',
               color: '#ef4444'
             },
-            {
-              id: 'lsu-vet',
-              name: 'LSU School of Veterinary Medicine',
-              description: 'News and updates from LSU Veterinary School',
-              url: 'https://www.lsu.edu/vetmed/news_and_events/index.xml',
-              api: 'rss2json',
-              category: 'lsu',
-              color: '#7c3aed'
-            }
           ];
           this.currentFilter = 'all';
           this.newsData = new Map();
