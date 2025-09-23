@@ -4,68 +4,871 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact • Stanfield Lab</title>
-  <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
+  <meta name="description" content="Contact the Stanfield Lab at LSU School of Veterinary Medicine. Get in touch for research collaborations, postdoctoral opportunities, and viral oncology inquiries.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    :root {
+      --primary-blue: #0ea5e9;
+      --primary-green: #10b981;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --accent-orange: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --accent-red: #ef4444;
+      --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-blue);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      z-index: 2000;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .site-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .brand-img { height: 40px; margin-right: 0.5rem; }
+
+    nav { display: flex; align-items: center; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-list a:hover,
+    .nav-list a[aria-current="page"] {
+      background-color: var(--bg-light);
+      color: var(--primary-blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    main { 
+      padding: 3rem 0 5rem;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0 0 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .contact-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    .contact-details {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .contact-details p {
+      margin: 0.5rem 0;
+    }
+
+    .contact-details strong {
+      color: var(--text-dark);
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      background: var(--bg-light);
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      background: var(--primary-blue);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+
+    .map-section {
+      background: var(--bg-card);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .map-header {
+      padding: 2rem 2rem 0;
+    }
+
+    .map-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .map-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: white;
+    }
+
+    .map-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .map-iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .method-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .method-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .method-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      margin: 0 auto 1.5rem;
+    }
+
+    .method-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      color: var(--text-dark);
+    }
+
+    .method-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .method-action {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .method-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+      text-decoration: none;
+    }
+
+    .visiting-info {
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      padding: 3rem;
+      border-radius: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .visiting-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0 0 2rem;
+      text-align: center;
+    }
+
+    .visiting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .visiting-item {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .visiting-item h4 {
+      color: var(--primary-blue);
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .visiting-item p {
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .response-time {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--primary-green);
+    }
+
+    .response-time h3 {
+      color: var(--primary-green);
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .response-time p {
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .site-footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo { height: 50px; }
+
+    .footer-brand h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+    }
+
+    .footer-brand p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid h4 {
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .footer-grid a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-grid a:hover {
+      color: var(--primary-blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(-100vh);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .nav-list[data-visible="true"] {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav-list a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      h1 { 
+        font-size: 2.5rem; 
+      }
+
+      .hero-subtitle { 
+        font-size: 1.1rem; 
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-methods {
+        grid-template-columns: 1fr;
+      }
+
+      .visiting-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visiting-info {
+        padding: 2rem 1.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-brand {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wrap {
+        padding: 0.75rem;
+      }
+
+      .container {
+        padding: 0 0.75rem;
+      }
+
+      main {
+        padding: 2rem 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .contact-card,
+      .method-card {
+        padding: 1.5rem;
+      }
+
+      .map-header {
+        padding: 1.5rem 1.5rem 0;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --bg-light: #0f172a;
+        --bg-card: #1e293b;
+        --border-color: #334155;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    button:focus,
+    input:focus,
+    select:focus,
+    a:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" role="banner">
-  <div class="container header-wrap">
-    <a class="brand" href="index.html" aria-label="Stanfield Lab home">
-      <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
-    </a>
-    <nav aria-label="Primary">
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-      <ul id="primaryNav" class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">People</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="opportunities.html">Opportunities</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
-  </div>
-</header>
+  <header class="site-header" role="banner">
+    <div class="container header-wrap">
+      <a class="brand" href="index.html" aria-label="Stanfield Lab home">
+        <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
+      </a>
+      <nav aria-label="Primary">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul id="primaryNav" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="opportunities.html">Opportunities</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
 
   <main id="main" class="container">
-<h1>Contact</h1>
-<p><strong>Stanfield Lab</strong><br>LSU School of Veterinary Medicine<br>Baton Rouge, LA 70803</p>
-<p>Email: <a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
-<iframe title="Map to LSU SVM" class="map" loading="lazy"
-  src="https://www.openstreetmap.org/export/embed.html?bbox=-91.192%2C30.405%2C-91.170%2C30.416&amp;layer=mapnik"></iframe>
-</main>
-
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
-      <div>
-        <h3>Stanfield Lab</h3>
-        <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
-      </div>
-    </div>
-    <div>
-      <h4>Find us</h4>
-      <p>
-        <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
-        Baton Rouge, LA 70803
+    <div class="hero-section">
+      <h1>Get In Touch</h1>
+      <p class="hero-subtitle">
+        Ready to collaborate, join our team, or learn more about our viral oncology research? 
+        We'd love to hear from you and explore how we can work together.
       </p>
     </div>
-    <div>
-      <h4>Contact</h4>
-      <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
-  </div>
-  <script src="assets/script.js"></script>
-</footer>
 
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-icon">👨‍🔬</div>
+            <h2 class="contact-title">Principal Investigator</h2>
+          </div>
+          <div class="contact-details">
+            <p><strong>Dr. Benjamin Stanfield</strong></p>
+            <p>Assistant Professor<br>
+            Department of Pathobiological Sciences<br>
+            LSU School of Veterinary Medicine</p>
+            <a href="mailto:bstanf5@lsu.edu?subject=Research%20Inquiry" class="contact-link">
+              ✉️ Email Dr. Stanfield
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-icon">🏛️</div>
+            <h3 class="contact-title">Lab Location</h3>
+          </div>
+          <div class="contact-details">
+            <p><strong>Stanfield Research Laboratory</strong></p>
+            <p>LSU School of Veterinary Medicine<br>
+            Skip Bertman Drive<br>
+            Baton Rouge, LA 70803</p>
+            <p><strong>Campus:</strong> LSU Main Campus<br>
+            <strong>Building:</strong> School of Veterinary Medicine</p>
+          </div>
+        </div>
+
+        <div class="response-time">
+          <h3>📬 Response Time</h3>
+          <p>We typically respond to emails within <strong>24-48 hours</strong> during business days. For urgent research matters, please indicate priority in your subject line.</p>
+        </div>
+      </div>
+
+      <div class="map-section">
+        <div class="map-header">
+          <h3 class="map-title">
+            <div class="map-icon">📍</div>
+            Find Us
+          </h3>
+          <p class="map-description">
+            Located on the LSU campus in Baton Rouge, our lab is easily accessible from major highways and public transportation. Visitor parking is available on campus.
+          </p>
+        </div>
+        <iframe 
+          class="map-iframe"
+          title="Map to LSU School of Veterinary Medicine" 
+          loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-91.192%2C30.405%2C-91.170%2C30.416&amp;layer=mapnik&amp;marker=30.4105%2C-91.1810"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <h2 style="text-align: center; font-size: 2.5rem; margin: 4rem 0 2rem;">Contact Us For</h2>
+
+    <div class="contact-methods">
+      <div class="method-card">
+        <div class="method-icon">🔬</div>
+        <h3 class="method-title">Research Collaborations</h3>
+        <p class="method-description">
+          Interested in collaborative research projects, shared resources, or joint grant applications in viral oncology and cancer immunotherapy.
+        </p>
+        <a href="mailto:bstanf5@lsu.edu?subject=Research%20Collaboration%20Opportunity" class="method-action">
+          Start a Collaboration
+        </a>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">👥</div>
+        <h3 class="method-title">Join Our Team</h3>
+        <p class="method-description">
+          Postdoctoral positions, graduate student opportunities, research technician roles, and undergraduate research experiences available.
+        </p>
+        <a href="mailto:bstanf5@lsu.edu?subject=Position%20Inquiry%20-%20[Position%20Type]" class="method-action">
+          Explore Positions
+        </a>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">📰</div>
+        <h3 class="method-title">Media & Press</h3>
+        <p class="method-description">
+          Journalists, science writers, and media professionals seeking expert commentary on viral oncology, cancer research, or veterinary medicine.
+        </p>
+        <a href="mailto:bstanf5@lsu.edu?subject=Media%20Inquiry" class="method-action">
+          Media Contact
+        </a>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">🎓</div>
+        <h3 class="method-title">Academic Partnerships</h3>
+        <p class="method-description">
+          University partnerships, student exchange programs, seminar invitations, and educational collaborations in cancer research.
+        </p>
+        <a href="mailto:bstanf5@lsu.edu?subject=Academic%20Partnership%20Inquiry" class="method-action">
+          Partner With Us
+        </a>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">🏭</div>
+        <h3 class="method-title">Industry Relations</h3>
+        <p class="method-description">
+          Pharmaceutical companies, biotech firms, and industry partners interested in translational research and technology transfer.
+        </p>
+        <a href="mailto:bstanf5@lsu.edu?subject=Industry%20Partnership%20Inquiry" class="method-action">
+          Industry Contact
+        </a>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">❓</div>
+        <h3 class="method-title">General Inquiries</h3>
+        <p class="method-description">
+          Questions about our research, lab capabilities, or anything else related to the Stanfield Lab and our work in viral oncology.
+        </p>
+        <a href="mailto:bstanf5@lsu.edu?subject=General%20Inquiry" class="method-action">
+          Ask a Question
+        </a>
+      </div>
+    </div>
+
+    <div class="visiting-info">
+      <h2 class="visiting-title">Planning a Visit?</h2>
+      <div class="visiting-grid">
+        <div class="visiting-item">
+          <h4>🚗 Parking</h4>
+          <p>Visitor parking available in designated areas on campus. Daily parking passes can be purchased at campus entrances or through the LSU parking app.</p>
+        </div>
+        
+        <div class="visiting-item">
+          <h4>🏢 Building Access</h4>
+          <p>The School of Veterinary Medicine requires ID for entry. Please coordinate your visit in advance for building access and lab tours.</p>
+        </div>
+        
+        <div class="visiting-item">
+          <h4>🚌 Transportation</h4>
+          <p>LSU is accessible via Capital Area Transit (CATS) bus system. The campus is also walkable and bike-friendly with rental options available.</p>
+        </div>
+        
+        <div class="visiting-item">
+          <h4>🏨 Accommodations</h4>
+          <p>Baton Rouge offers various lodging options from budget to luxury. The Cook Hotel on LSU campus provides convenient on-site accommodation.</p>
+        </div>
+        
+        <div class="visiting-item">
+          <h4>⏰ Office Hours</h4>
+          <p>Lab meetings and office visits available Monday-Friday, 8:00 AM - 5:00 PM. Please schedule in advance to ensure availability.</p>
+        </div>
+        
+        <div class="visiting-item">
+          <h4>📋 Lab Safety</h4>
+          <p>All lab visitors must complete safety training and wear appropriate PPE. We'll provide detailed safety protocols before your visit.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+        <div>
+          <h3>Stanfield Lab</h3>
+          <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        </div>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p>
+          <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
+          Baton Rouge, LA 70803
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2024</span> Stanfield Lab • LSU SVM</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
+
+    if (navToggle && primaryNav) {
+      navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+        primaryNav.setAttribute('data-visible', (!isExpanded).toString());
+      });
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        console.log('Theme toggle clicked');
+      });
+    }
+
+    // Update footer year
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
