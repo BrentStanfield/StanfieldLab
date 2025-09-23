@@ -4,70 +4,981 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Opportunities • Stanfield Lab</title>
-  <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
+  <meta name="description" content="Join the Stanfield Lab at LSU SVM: Pioneering viral oncology research, innovative guinea pig models, and translational cancer immunology. Postdoctoral and collaboration opportunities available.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    :root {
+      --primary-blue: #0ea5e9;
+      --primary-green: #10b981;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --accent-orange: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --accent-red: #ef4444;
+      --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      --gradient-warm: linear-gradient(135deg, #f59e0b, #ef4444);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-blue);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      z-index: 2000;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .site-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .brand-img { height: 40px; margin-right: 0.5rem; }
+
+    nav { display: flex; align-items: center; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-list a:hover,
+    .nav-list a[aria-current="page"] {
+      background-color: var(--bg-light);
+      color: var(--primary-blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    main { 
+      padding: 3rem 0 5rem;
+    }
+
+    .hero-section {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      margin: -3rem -1rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,20 L80,20 L80,80 L20,80 Z' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='15' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3C/svg%3E") repeat;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin: 0 0 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-button {
+      background: white;
+      color: var(--primary-blue);
+      padding: 1rem 2rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      color: var(--primary-green);
+    }
+
+    h1, h2, h3 {
+      color: var(--text-dark);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 3rem 0 2rem;
+      text-align: center;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .opportunities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .opportunity-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opportunity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+    }
+
+    .opportunity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+      color: var(--text-dark);
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .card-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+
+    .card-highlights li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-highlights li:last-child {
+      border-bottom: none;
+    }
+
+    .card-highlights li::before {
+      content: '✓';
+      color: var(--primary-green);
+      font-weight: 600;
+    }
+
+    .what-we-offer {
+      background: var(--bg-card);
+      padding: 3rem;
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-md);
+      margin: 4rem 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .offer-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .offer-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-warm);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+      color: white;
+    }
+
+    .offer-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .offer-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .research-focus {
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      padding: 3rem;
+      border-radius: 1.5rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+
+    .focus-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .focus-tag {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .application-section {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .application-section h2 {
+      color: white;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .application-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+    }
+
+    .step-description {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+
+    .contact-cta {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 1.25rem 3rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      color: white;
+      text-decoration: none;
+    }
+
+    .testimonial {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border-left: 4px solid var(--primary-blue);
+      margin: 3rem 0;
+      font-style: italic;
+      box-shadow: var(--shadow-md);
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin: 0 0 1rem;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--primary-blue);
+      font-style: normal;
+    }
+
+    .site-footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo { height: 50px; }
+
+    .footer-brand h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+    }
+
+    .footer-brand p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid h4 {
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .footer-grid a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-grid a:hover {
+      color: var(--primary-blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(-100vh);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .nav-list[data-visible="true"] {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav-list a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .hero-title { 
+        font-size: 2.5rem; 
+      }
+
+      .hero-subtitle { 
+        font-size: 1.25rem; 
+      }
+
+      h2 { 
+        font-size: 2rem; 
+      }
+
+      .opportunities-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .application-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-section {
+        padding: 3rem 1rem;
+      }
+
+      .what-we-offer,
+      .research-focus,
+      .application-section {
+        padding: 2rem 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-brand {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wrap {
+        padding: 0.75rem;
+      }
+
+      .container {
+        padding: 0 0.75rem;
+      }
+
+      main {
+        padding: 2rem 0;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .opportunity-card {
+        padding: 1.5rem;
+      }
+
+      .focus-tags {
+        gap: 0.5rem;
+      }
+
+      .focus-tag {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --bg-light: #0f172a;
+        --bg-card: #1e293b;
+        --border-color: #334155;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    button:focus,
+    input:focus,
+    select:focus,
+    a:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" role="banner">
-  <div class="container header-wrap">
-    <a class="brand" href="index.html" aria-label="Stanfield Lab home">
-      <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
-    </a>
-    <nav aria-label="Primary">
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-      <ul id="primaryNav" class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">People</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="opportunities.html">Opportunities</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
-  </div>
-</header>
+  <header class="site-header" role="banner">
+    <div class="container header-wrap">
+      <a class="brand" href="index.html" aria-label="Stanfield Lab home">
+        <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
+      </a>
+      <nav aria-label="Primary">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul id="primaryNav" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="opportunities.html" aria-current="page">Opportunities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
 
-  <main id="main" class="container">
-<h1>Opportunities</h1>
-<ul>
-  <li>Graduate students (PBS &amp; Biomedical programs)</li>
-  <li>Research associate / technician</li>
-  <li>Undergraduate researchers</li>
-</ul>
-<p>Email one PDF with a brief cover letter, CV, and references.</p>
-</main>
-
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
-      <div>
-        <h3>Stanfield Lab</h3>
-        <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+  <main id="main">
+    <div class="hero-section">
+      <div class="container hero-content">
+        <h1 class="hero-title">Join Our Team</h1>
+        <p class="hero-subtitle">
+          Shape the future of viral oncology and translational cancer research at one of the nation's leading veterinary medical schools
+        </p>
+        <a href="#postdoc" class="cta-button">
+          <span>🔬</span> Explore Opportunities
+        </a>
       </div>
     </div>
-    <div>
-      <h4>Find us</h4>
-      <p>
-        <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
-        Baton Rouge, LA 70803
-      </p>
-    </div>
-    <div>
-      <h4>Contact</h4>
-      <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
-  </div>
-  <script src="assets/script.js"></script>
-</footer>
 
+    <div class="container">
+      <div class="research-focus">
+        <h2>Our Research Focus</h2>
+        <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin: 0 auto;">
+          We're pioneering innovative approaches to understand and combat virus-associated cancers through cutting-edge research in viral oncology, immunotherapy, and translational disease modeling.
+        </p>
+        <div class="focus-tags">
+          <span class="focus-tag">Viral Oncology</span>
+          <span class="focus-tag">Cancer Immunotherapy</span>
+          <span class="focus-tag">Guinea Pig Disease Models</span>
+          <span class="focus-tag">Translational Research</span>
+          <span class="focus-tag">Tumor Microenvironment</span>
+          <span class="focus-tag">Oncolytic Viruses</span>
+        </div>
+      </div>
+
+      <h2 id="opportunities">Current Opportunities</h2>
+      
+      <div class="opportunities-grid">
+        <div class="opportunity-card" id="postdoc">
+          <div class="card-icon">🧬</div>
+          <h3 class="card-title">Postdoctoral Research Associate</h3>
+          <p class="card-description">
+            Lead cutting-edge research in viral oncology and cancer immunotherapy. Work with state-of-the-art facilities and contribute to groundbreaking discoveries in translational cancer research.
+          </p>
+          <ul class="card-highlights">
+            <li>Independent research projects with mentorship</li>
+            <li>Access to advanced molecular biology core facilities</li>
+            <li>Opportunities for grant writing and funding</li>
+            <li>Collaboration with clinical researchers</li>
+            <li>Career development and networking support</li>
+            <li>Potential for first-author publications</li>
+          </ul>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="card-icon">👥</div>
+          <h3 class="card-title">Research Collaborations</h3>
+          <p class="card-description">
+            Partner with our team on interdisciplinary research projects spanning virology, oncology, immunology, and veterinary medicine. Perfect for established researchers seeking new perspectives.
+          </p>
+          <ul class="card-highlights">
+            <li>Cross-institutional collaborative projects</li>
+            <li>Shared resources and expertise</li>
+            <li>Joint grant opportunities</li>
+            <li>Student and trainee exchanges</li>
+            <li>Co-authored publications</li>
+            <li>Conference presentations and workshops</li>
+          </ul>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="card-icon">🎓</div>
+          <h3 class="card-title">Graduate Students</h3>
+          <p class="card-description">
+            Pursue your PhD in Pathobiological Sciences or Biomedical Sciences while conducting innovative research in viral oncology and cancer biology.
+          </p>
+          <ul class="card-highlights">
+            <li>Comprehensive graduate training program</li>
+            <li>Competitive stipends and benefits</li>
+            <li>Research rotations available</li>
+            <li>Mentorship from experienced faculty</li>
+            <li>Access to cutting-edge technologies</li>
+            <li>Professional development opportunities</li>
+          </ul>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="card-icon">⚗️</div>
+          <h3 class="card-title">Research Technician</h3>
+          <p class="card-description">
+            Support groundbreaking research through expert technical assistance in molecular biology, cell culture, and animal model development.
+          </p>
+          <ul class="card-highlights">
+            <li>Hands-on experience with advanced techniques</li>
+            <li>Professional growth opportunities</li>
+            <li>Collaborative research environment</li>
+            <li>Continuing education support</li>
+            <li>Competitive salary and benefits</li>
+            <li>Potential for co-authorship</li>
+          </ul>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="card-icon">🔍</div>
+          <h3 class="card-title">Undergraduate Researchers</h3>
+          <p class="card-description">
+            Gain valuable research experience while contributing to meaningful scientific discoveries. Perfect for pre-med, pre-vet, or research-focused students.
+          </p>
+          <ul class="card-highlights">
+            <li>Mentored research projects</li>
+            <li>Laboratory skills training</li>
+            <li>Research presentation opportunities</li>
+            <li>Letters of recommendation</li>
+            <li>Graduate school preparation</li>
+            <li>Summer research programs</li>
+          </ul>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="card-icon">🌐</div>
+          <h3 class="card-title">Visiting Scholars</h3>
+          <p class="card-description">
+            International researchers and sabbatical visitors welcome to collaborate on specialized projects and exchange expertise.
+          </p>
+          <ul class="card-highlights">
+            <li>Flexible duration arrangements</li>
+            <li>Cultural and scientific exchange</li>
+            <li>Access to unique research models</li>
+            <li>Networking opportunities</li>
+            <li>Joint publication potential</li>
+            <li>LSU community integration</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="what-we-offer">
+        <h2>What We Offer</h2>
+        <p style="text-align: center; font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+          Join a dynamic research environment that combines cutting-edge science with supportive mentorship and exceptional career development opportunities.
+        </p>
+        
+        <div class="offer-grid">
+          <div class="offer-item">
+            <div class="offer-icon">🏛️</div>
+            <h4 class="offer-title">World-Class Facilities</h4>
+            <p class="offer-description">State-of-the-art laboratories, core facilities, and specialized equipment for viral oncology research</p>
+          </div>
+          
+          <div class="offer-item">
+            <div class="offer-icon">🧠</div>
+            <h4 class="offer-title">Expert Mentorship</h4>
+            <p class="offer-description">Personalized guidance from experienced researchers dedicated to your scientific and career development</p>
+          </div>
+          
+          <div class="offer-item">
+            <div class="offer-icon">🤝</div>
+            <h4 class="offer-title">Collaborative Network</h4>
+            <p class="offer-description">Connect with researchers across LSU, medical centers, and international institutions</p>
+          </div>
+          
+          <div class="offer-item">
+            <div class="offer-icon">📈</div>
+            <h4 class="offer-title">Career Growth</h4>
+            <p class="offer-description">Professional development, grant writing support, and pathways to independent research careers</p>
+          </div>
+          
+          <div class="offer-item">
+            <div class="offer-icon">🎯</div>
+            <h4 class="offer-title">Impactful Research</h4>
+            <p class="offer-description">Contribute to research that directly translates to improved cancer treatments and patient outcomes</p>
+          </div>
+          
+          <div class="offer-item">
+            <div class="offer-icon">🌟</div>
+            <h4 class="offer-title">Innovation Culture</h4>
+            <p class="offer-description">Encouragement to pursue creative research directions and develop novel experimental approaches</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="application-section">
+        <div class="container">
+          <h2>Ready to Join Us?</h2>
+          <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem;">
+            We're actively seeking passionate researchers to join our team. Here's how to apply:
+          </p>
+          
+          <div class="application-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4 class="step-title">Prepare Materials</h4>
+              <p class="step-description">CV, cover letter, research statement, and contact information for 3 references</p>
+            </div>
+            
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4 class="step-title">Submit Application</h4>
+              <p class="step-description">Send a single PDF with all materials to our lab email</p>
+            </div>
+            
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4 class="step-title">Initial Review</h4>
+              <p class="step-description">We'll review your application and contact you within 2 weeks</p>
+            </div>
+            
+            <div class="step">
+              <div class="step-number">4</div>
+              <h4 class="step-title">Interview Process</h4>
+              <p class="step-description">Virtual or in-person interviews, research presentation, and lab meetings</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 3rem;">
+            <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 1rem;">
+              Questions about opportunities or want to discuss potential collaborations?
+            </p>
+            <a href="mailto:bstanf5@lsu.edu?subject=Research%20Opportunity%20Inquiry" class="contact-cta">
+              <span>✉️</span> Contact Dr. Stanfield
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+        <div>
+          <h3>Stanfield Lab</h3>
+          <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        </div>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p>
+          <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
+          Baton Rouge, LA 70803
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2024</span> Stanfield Lab • LSU SVM</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
+
+    if (navToggle && primaryNav) {
+      navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+        primaryNav.setAttribute('data-visible', (!isExpanded).toString());
+      });
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        console.log('Theme toggle clicked');
+      });
+    }
+
+    // Update footer year
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
