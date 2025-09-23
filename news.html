@@ -4,66 +4,935 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>News • Stanfield Lab</title>
-  <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
+  <meta name="description" content="Stanfield Lab at LSU SVM: Latest news in viral oncology research, guinea pig disease models, and cancer immunology from authentic scientific sources.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    :root {
+      --primary-blue: #0ea5e9;
+      --primary-green: #10b981;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --accent-orange: #f59e0b;
+      --accent-purple: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-blue);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      z-index: 2000;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .site-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .brand-img { height: 40px; margin-right: 0.5rem; }
+
+    nav { display: flex; align-items: center; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-list a:hover,
+    .nav-list a[aria-current="page"] {
+      background-color: var(--bg-light);
+      color: var(--primary-blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    main { 
+      padding: 3rem 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .page-intro {
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    .news-toolbar {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .toolbar-content {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .source-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .source-filter {
+      background: var(--bg-light);
+      border: 2px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .source-filter:hover,
+    .source-filter.active {
+      background: var(--primary-blue);
+      color: white;
+      border-color: var(--primary-blue);
+    }
+
+    .refresh-btn {
+      background: var(--primary-green);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .refresh-btn:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+
+    .refresh-btn:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading-spinner {
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .news-sources {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .news-source {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    .news-source:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+
+    .source-header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      color: white;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .source-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+    }
+
+    .source-description {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    .source-status {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .source-status.loading {
+      background: var(--accent-orange);
+      animation: pulse 2s infinite;
+    }
+
+    .source-status.success {
+      background: #10b981;
+    }
+
+    .source-status.error {
+      background: #ef4444;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .news-items {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .news-item {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.2s;
+    }
+
+    .news-item:hover {
+      background-color: var(--bg-light);
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-title {
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      line-height: 1.4;
+    }
+
+    .news-title a {
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .news-title a:hover {
+      color: var(--primary-blue);
+    }
+
+    .news-excerpt {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+      line-height: 1.5;
+    }
+
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .news-date {
+      font-weight: 600;
+    }
+
+    .news-source-name {
+      background: var(--bg-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-weight: 600;
+    }
+
+    .pub-link {
+      color: var(--primary-green);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      background: var(--bg-light);
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pub-link:hover {
+      background: var(--primary-green);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgb(16 185 129 / 0.3);
+    }
+
+    .error-message {
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 3rem;
+      font-size: 1.1rem;
+    }
+
+    .site-footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo { height: 50px; }
+
+    .footer-brand h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+    }
+
+    .footer-brand p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid h4 {
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .footer-grid a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-grid a:hover {
+      color: var(--primary-blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(-100vh);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .nav-list[data-visible="true"] {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav-list a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      h1 { 
+        font-size: 2.5rem; 
+        margin-bottom: 2rem;
+      }
+
+      .page-intro { 
+        font-size: 1.1rem; 
+        margin-bottom: 2rem;
+      }
+
+      .toolbar-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .source-filters {
+        justify-content: center;
+      }
+
+      .news-sources {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-brand {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wrap {
+        padding: 0.75rem;
+      }
+
+      .container {
+        padding: 0 0.75rem;
+      }
+
+      main {
+        padding: 2rem 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .news-toolbar {
+        padding: 1.5rem;
+      }
+
+      .news-item {
+        padding: 1rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --bg-light: #0f172a;
+        --bg-card: #1e293b;
+        --border-color: #334155;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    button:focus,
+    input:focus,
+    select:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" role="banner">
-  <div class="container header-wrap">
-    <a class="brand" href="index.html" aria-label="Stanfield Lab home">
-      <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
-    </a>
-    <nav aria-label="Primary">
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-      <ul id="primaryNav" class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">People</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="opportunities.html">Opportunities</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
-  </div>
-</header>
+  <header class="site-header" role="banner">
+    <div class="container header-wrap">
+      <a class="brand" href="index.html" aria-label="Stanfield Lab home">
+        <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
+      </a>
+      <nav aria-label="Primary">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul id="primaryNav" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="news.html" aria-current="page">News</a></li>
+          <li><a href="opportunities.html">Opportunities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
 
   <main id="main" class="container">
-<h1>News</h1>
-<div id="newsFeed" class="news-feed" aria-live="polite"></div>
-<p class="muted">Post updates by editing <code>assets/news.json</code>.</p>
-</main>
+    <h1>News</h1>
+    
+    <p class="page-intro">
+      Stay updated with the latest developments in viral oncology, cancer research, and guinea pig disease models. We aggregate authentic content from PubMed research papers, scientific journals, and institutional sources relevant to our lab's focus areas.
+      <br><small style="color: var(--text-muted); font-size: 0.9em;">News feeds refresh automatically and may be subject to API rate limits.</small>
+    </p>
 
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
-      <div>
-        <h3>Stanfield Lab</h3>
-        <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+    <div class="news-toolbar">
+      <div class="toolbar-content">
+        <div class="source-filters">
+          <button class="source-filter active" data-source="all">All Sources</button>
+          <button class="source-filter" data-source="academic">Research Papers</button>
+          <button class="source-filter" data-source="lsu">LSU Updates</button>
+        </div>
+        <button id="refreshBtn" class="refresh-btn">
+          <span class="refresh-icon">🔄</span>
+          Refresh
+        </button>
       </div>
     </div>
-    <div>
-      <h4>Find us</h4>
-      <p>
-        <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
-        Baton Rouge, LA 70803
-      </p>
+
+    <div id="newsSources" class="news-sources" aria-live="polite">
+      <!-- News sources will be dynamically populated here -->
     </div>
-    <div>
-      <h4>Contact</h4>
-      <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+
+    <script>
+      class NewsAggregator {
+        constructor() {
+          this.sources = [
+            {
+              id: 'pubmed-viral-oncology',
+              name: 'PubMed: Viral Oncology',
+              description: 'Latest research papers on viral oncology and cancer',
+              api: 'pubmed',
+              searchTerms: '(viral oncology) OR (oncolytic virus) OR (viral cancer therapy)',
+              category: 'academic',
+              color: '#0ea5e9'
+            },
+            {
+              id: 'pubmed-guinea-pig',
+              name: 'PubMed: Guinea Pig Models',
+              description: 'Research using guinea pig disease models',
+              api: 'pubmed',
+              searchTerms: '(guinea pig model) AND (cancer OR virus OR tumor)',
+              category: 'academic',
+              color: '#10b981'
+            },
+            {
+              id: 'nature-medicine',
+              name: 'Nature Medicine',
+              description: 'Latest medical and cancer research breakthroughs',
+              url: 'https://feeds.nature.com/nm/rss/current',
+              api: 'rss2json',
+              category: 'academic',
+              color: '#8b5cf6'
+            },
+            {
+              id: 'nih-cancer',
+              name: 'NIH Cancer Research',
+              description: 'National Cancer Institute news and research updates',
+              url: 'https://www.cancer.gov/rss/dceg.xml',
+              api: 'rss2json',
+              category: 'academic',
+              color: '#f59e0b'
+            },
+            {
+              id: 'jvi-journal',
+              name: 'Journal of Virology',
+              description: 'American Society for Microbiology virology research',
+              url: 'https://journals.asm.org/action/showFeed?type=etoc&feed=rss&jc=jvi',
+              api: 'rss2json',
+              category: 'academic',
+              color: '#ef4444'
+            },
+            {
+              id: 'lsu-vet',
+              name: 'LSU School of Veterinary Medicine',
+              description: 'News and updates from LSU Veterinary School',
+              url: 'https://www.lsu.edu/vetmed/news_and_events/index.xml',
+              api: 'rss2json',
+              category: 'lsu',
+              color: '#7c3aed'
+            }
+          ];
+          this.currentFilter = 'all';
+          this.newsData = new Map();
+          this.init();
+        }
+
+        init() {
+          this.renderSources();
+          this.setupEventListeners();
+          this.loadNews();
+        }
+
+        setupEventListeners() {
+          // Source filter buttons
+          document.querySelectorAll('.source-filter').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              document.querySelectorAll('.source-filter').forEach(b => b.classList.remove('active'));
+              e.target.classList.add('active');
+              this.currentFilter = e.target.dataset.source;
+              this.filterSources();
+            });
+          });
+
+          // Refresh button
+          document.getElementById('refreshBtn').addEventListener('click', () => {
+            this.loadNews();
+          });
+
+          // Mobile navigation
+          const navToggle = document.getElementById('navToggle');
+          const primaryNav = document.getElementById('primaryNav');
+
+          if (navToggle && primaryNav) {
+            navToggle.addEventListener('click', () => {
+              const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+              navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+              primaryNav.setAttribute('data-visible', (!isExpanded).toString());
+            });
+          }
+
+          // Theme toggle
+          const themeToggle = document.getElementById('themeToggle');
+          if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+              console.log('Theme toggle clicked');
+            });
+          }
+        }
+
+        renderSources() {
+          const container = document.getElementById('newsSources');
+          container.innerHTML = this.sources.map(source => `
+            <div class="news-source" data-category="${source.category}" data-source="${source.id}">
+              <div class="source-header" style="background: linear-gradient(135deg, ${source.color}, ${this.adjustColor(source.color, 20)});">
+                <div class="source-status loading" id="status-${source.id}"></div>
+                <h3 class="source-title">${source.name}</h3>
+                <p class="source-description">${source.description}</p>
+              </div>
+              <ul class="news-items" id="items-${source.id}">
+                <li class="empty-state">Loading news...</li>
+              </ul>
+            </div>
+          `).join('');
+        }
+
+        adjustColor(hex, amount) {
+          const num = parseInt(hex.replace('#', ''), 16);
+          const amt = Math.round(2.55 * amount);
+          const R = (num >> 16) + amt;
+          const G = (num >> 8 & 0x00FF) + amt;
+          const B = (num & 0x0000FF) + amt;
+          return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+            (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+        }
+
+        async loadNews() {
+          const refreshBtn = document.getElementById('refreshBtn');
+          refreshBtn.disabled = true;
+          refreshBtn.innerHTML = '<div class="loading-spinner"></div> Loading...';
+
+          // Reset all source statuses to loading
+          this.sources.forEach(source => {
+            const status = document.getElementById(`status-${source.id}`);
+            status.className = 'source-status loading';
+          });
+
+          // Load news from each source
+          const promises = this.sources.map(source => this.fetchFromSource(source));
+          await Promise.allSettled(promises);
+
+          refreshBtn.disabled = false;
+          refreshBtn.innerHTML = '<span class="refresh-icon">🔄</span> Refresh';
+        }
+
+        async fetchFromSource(source) {
+          const itemsContainer = document.getElementById(`items-${source.id}`);
+          const statusIndicator = document.getElementById(`status-${source.id}`);
+
+          try {
+            let newsData = [];
+
+            if (source.api === 'rss2json') {
+              // Use RSS2JSON service for RSS feeds
+              const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&count=6`);
+              const data = await response.json();
+              
+              if (data.status === 'ok') {
+                newsData = data.items.map(item => ({
+                  title: item.title,
+                  excerpt: item.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+                  link: item.link,
+                  date: new Date(item.pubDate).toLocaleDateString(),
+                  source: source.name
+                }));
+              } else {
+                throw new Error('RSS feed unavailable');
+              }
+            } else if (source.api === 'pubmed') {
+              // Use PubMed eSearch API for research papers
+              const searchTerms = encodeURIComponent(source.searchTerms);
+              const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${searchTerms}&retmax=6&sort=pub+date&retmode=json`;
+              
+              const searchResponse = await fetch(searchUrl);
+              const searchData = await searchResponse.json();
+              
+              if (searchData.esearchresult && searchData.esearchresult.idlist.length > 0) {
+                const ids = searchData.esearchresult.idlist.join(',');
+                const detailUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids}&retmode=json`;
+                
+                const detailResponse = await fetch(detailUrl);
+                const detailData = await detailResponse.json();
+                
+                newsData = Object.values(detailData.result).filter(item => item.uid).map(item => ({
+                  title: item.title || 'Research Article',
+                  excerpt: `${item.authors?.[0]?.name || 'Various authors'} - ${item.source || 'Medical Journal'} research on ${source.description.toLowerCase()}.`,
+                  link: `https://pubmed.ncbi.nlm.nih.gov/${item.uid}/`,
+                  date: item.pubdate || new Date().toLocaleDateString(),
+                  source: source.name
+                }));
+              }
+            }
+            
+            this.newsData.set(source.id, newsData);
+            this.renderNewsItems(source.id, newsData);
+            statusIndicator.className = 'source-status success';
+            
+          } catch (error) {
+            console.error(`Error fetching from ${source.name}:`, error);
+            statusIndicator.className = 'source-status error';
+            itemsContainer.innerHTML = `
+              <li class="error-message">
+                ${source.name} temporarily unavailable. 
+                <br><small>${source.api === 'pubmed' ? 'PubMed API may be rate limited.' : 'RSS feed may be temporarily down.'} Try refreshing in a few minutes.</small>
+              </li>
+            `;
+          }
+        }
+
+        renderNewsItems(sourceId, items) {
+          const container = document.getElementById(`items-${sourceId}`);
+          
+          if (!items || items.length === 0) {
+            container.innerHTML = '<li class="empty-state">No recent articles available</li>';
+            return;
+          }
+
+          container.innerHTML = items.map(item => {
+            const isResearchPaper = item.link && item.link.includes('pubmed');
+            const linkIcon = isResearchPaper ? '📄' : '🔗';
+            const linkText = isResearchPaper ? 'View on PubMed' : 'Read Article';
+            
+            return `
+              <li class="news-item">
+                <h4 class="news-title">
+                  <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                </h4>
+                <p class="news-excerpt">${item.excerpt}</p>
+                <div class="news-meta">
+                  <span class="news-date">${item.date}</span>
+                  <span class="news-source-name">${item.source}</span>
+                </div>
+                ${item.link !== '#' ? `
+                  <div style="margin-top: 0.75rem;">
+                    <a href="${item.link}" target="_blank" rel="noopener" class="pub-link" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+                      ${linkIcon} ${linkText}
+                    </a>
+                  </div>
+                ` : ''}
+              </li>
+            `;
+          }).join('');
+        }
+
+        filterSources() {
+          const sources = document.querySelectorAll('.news-source');
+          sources.forEach(source => {
+            const category = source.dataset.category;
+            const shouldShow = this.currentFilter === 'all' || category === this.currentFilter;
+            source.style.display = shouldShow ? 'block' : 'none';
+          });
+        }
+      }
+
+      // Initialize news aggregator when page loads
+      document.addEventListener('DOMContentLoaded', () => {
+        new NewsAggregator();
+        
+        // Update footer year
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+      });
+    </script>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+        <div>
+          <h3>Stanfield Lab</h3>
+          <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        </div>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p>
+          <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
+          Baton Rouge, LA 70803
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+      </div>
     </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
-  </div>
-  <script src="assets/script.js"></script>
-</footer>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2024</span> Stanfield Lab • LSU SVM</p>
+    </div>
+  </footer>
 
 </body>
 </html>
