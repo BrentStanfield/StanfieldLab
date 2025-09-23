@@ -652,8 +652,8 @@
               id: 'pubmed-viral-oncology',
               name: 'PubMed: Viral Oncology',
               description: 'Latest research papers on viral oncology and cancer',
-              api: 'pubmed',
-              searchTerms: '(viral oncology) OR (oncolytic virus) OR (viral cancer therapy)',
+              url: 'https://pubmed.ncbi.nlm.nih.gov/rss/search/1zA4h3Qg-ND_Lvw8qAjNu5jGnMjRX9q5NYxcs5YJtQUL9jBs_m/?limit=15&utm_campaign=pubmed-2&fc=20250923132122',
+              api: 'rss2json',
               category: 'academic',
               color: '#0ea5e9'
             },
@@ -661,10 +661,11 @@
               id: 'pubmed-guinea-pig',
               name: 'PubMed: Guinea Pig Models',
               description: 'Research using guinea pig disease models',
-              api: 'pubmed',
-              searchTerms: '(guinea pig model) AND (cancer OR virus OR tumor)',
+              url: 'https://pubmed.ncbi.nlm.nih.gov/rss/search/1zA4h3Qg-ND_Lvw8qAjNu5jGnMjRX9q5NYxcs5YJtQUL9jBs_m/?limit=15&utm_campaign=pubmed-2&fc=20250923132122',
+              api: 'rss2json',
               category: 'academic',
-              color: '#10b981'
+              color: '#10b981',
+              note: 'Using viral oncology RSS temporarily - update with guinea pig model RSS when available'
             },
             {
               id: 'nature-medicine',
@@ -804,61 +805,36 @@
           try {
             let newsData = [];
 
-            if (source.api === 'rss2json') {
-              // Use RSS2JSON service for RSS feeds
-              const rssUrl = source.rssUrl || source.url;
-              const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=8`);
-              const data = await response.json();
-              
-              if (data.status === 'ok') {
-                newsData = data.items.map(item => {
-                  // Clean HTML from description and limit length
-                  let description = item.description.replace(/<[^>]*>/g, '');
-                  description = description.length > 200 ? description.substring(0, 200) + '...' : description;
-                  
-                  // Format date
-                  const publishDate = item.pubDate ? new Date(item.pubDate) : new Date();
-                  const formattedDate = publishDate.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric' 
-                  });
+            // All sources now use RSS feeds through rss2json
+            const rssUrl = source.rssUrl || source.url;
+            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`);
+            const data = await response.json();
+            
+            if (data.status === 'ok') {
+              newsData = data.items.map(item => {
+                // Clean HTML from description and limit length
+                let description = item.description.replace(/<[^>]*>/g, '');
+                description = description.length > 200 ? description.substring(0, 200) + '...' : description;
+                
+                // Format date
+                const publishDate = item.pubDate ? new Date(item.pubDate) : new Date();
+                const formattedDate = publishDate.toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'short', 
+                  day: 'numeric' 
+                });
 
-                  return {
-                    title: item.title,
-                    excerpt: description,
-                    link: item.link,
-                    date: formattedDate,
-                    source: source.name,
-                    pubDate: publishDate
-                  };
-                }).sort((a, b) => b.pubDate - a.pubDate); // Sort by publication date, newest first
-              } else {
-                throw new Error(`RSS feed error: ${data.message || 'Feed unavailable'}`);
-              }
-            } else if (source.api === 'pubmed') {
-              // Use PubMed eSearch API for research papers
-              const searchTerms = encodeURIComponent(source.searchTerms);
-              const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${searchTerms}&retmax=8&sort=pub+date&retmode=json`;
-              
-              const searchResponse = await fetch(searchUrl);
-              const searchData = await searchResponse.json();
-              
-              if (searchData.esearchresult && searchData.esearchresult.idlist.length > 0) {
-                const ids = searchData.esearchresult.idlist.join(',');
-                const detailUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids}&retmode=json`;
-                
-                const detailResponse = await fetch(detailUrl);
-                const detailData = await detailResponse.json();
-                
-                newsData = Object.values(detailData.result).filter(item => item.uid).map(item => ({
-                  title: item.title || 'Research Article',
-                  excerpt: `${item.authors?.[0]?.name || 'Various authors'} - ${item.source || 'Medical Journal'} research on ${source.description.toLowerCase()}.`,
-                  link: `https://pubmed.ncbi.nlm.nih.gov/${item.uid}/`,
-                  date: item.pubdate || new Date().toLocaleDateString(),
-                  source: source.name
-                }));
-              }
+                return {
+                  title: item.title,
+                  excerpt: description,
+                  link: item.link,
+                  date: formattedDate,
+                  source: source.name,
+                  pubDate: publishDate
+                };
+              }).sort((a, b) => b.pubDate - a.pubDate); // Sort by publication date, newest first
+            } else {
+              throw new Error(`RSS feed error: ${data.message || 'Feed unavailable'}`);
             }
             
             this.newsData.set(source.id, newsData);
@@ -870,11 +846,7 @@
             statusIndicator.className = 'source-status error';
             
             let errorMessage = `${source.name} temporarily unavailable.`;
-            if (source.api === 'pubmed') {
-              errorMessage += '<br><small>PubMed API may be rate limited. Try refreshing in a few minutes.</small>';
-            } else {
-              errorMessage += '<br><small>RSS feed may be temporarily down. Try refreshing in a few minutes.</small>';
-            }
+            errorMessage += '<br><small>RSS feed may be temporarily down. Try refreshing in a few minutes.</small>';
             
             itemsContainer.innerHTML = `<li class="error-message">${errorMessage}</li>`;
           }
