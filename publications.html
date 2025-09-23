@@ -6,149 +6,853 @@
   <title>Publications • Stanfield Lab</title>
   <meta name="description" content="Stanfield Lab at LSU SVM: Viral oncology and guinea-pig models of virus-associated cancers.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    :root {
+      --primary-blue: #0ea5e9;
+      --primary-green: #10b981;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --accent-orange: #f59e0b;
+      --accent-purple: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-blue);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      z-index: 2000;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .site-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .brand-img { height: 40px; margin-right: 0.5rem; }
+
+    nav { display: flex; align-items: center; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-list a:hover,
+    .nav-list a[aria-current="page"] {
+      background-color: var(--bg-light);
+      color: var(--primary-blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    main { 
+      padding: 3rem 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .page-intro {
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    .pub-toolbar {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .toolbar-content {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    #pubSearch {
+      width: 100%;
+      padding: 0.875rem 1rem 0.875rem 3rem;
+      border: 2px solid var(--border-color);
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      background: var(--bg-light);
+      transition: all 0.2s;
+    }
+
+    #pubSearch:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgb(14 165 233 / 0.1);
+    }
+
+    #pubYearFilter {
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      background: var(--bg-card);
+      cursor: pointer;
+      min-width: 150px;
+      transition: all 0.2s;
+    }
+
+    #pubYearFilter:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgb(14 165 233 / 0.1);
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .pub-count {
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    .sort-options {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .sort-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-muted);
+    }
+
+    .sort-btn.active,
+    .sort-btn:hover {
+      background: var(--primary-blue);
+      color: white;
+      border-color: var(--primary-blue);
+    }
+
+    .pub-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pub-list li {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pub-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
+    }
+
+    .pub-list li:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    }
+
+    .pub-list li:hover::before {
+      transform: scaleY(1);
+    }
+
+    .pub-title {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .pub-authors {
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .pub-journal {
+      color: var(--primary-blue);
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .pub-year {
+      background: var(--bg-light);
+      color: var(--text-muted);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .pub-link {
+      color: var(--primary-green);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      background: var(--bg-light);
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pub-link:hover {
+      background: var(--primary-green);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgb(16 185 129 / 0.3);
+    }
+
+    .pub-link::after {
+      content: '🔗';
+      font-size: 0.9em;
+    }
+
+    .muted {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      padding: 3rem;
+      background: var(--bg-card);
+      border-radius: 1rem;
+      border: 2px dashed var(--border-color);
+      margin: 2rem 0;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid #fecaca;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .site-footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo { height: 50px; }
+
+    .footer-brand h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+    }
+
+    .footer-brand p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid h4 {
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .footer-grid a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-grid a:hover {
+      color: var(--primary-blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(-100vh);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .nav-list[data-visible="true"] {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav-list a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      h1 { 
+        font-size: 2.5rem; 
+        margin-bottom: 2rem;
+      }
+
+      .page-intro { 
+        font-size: 1.1rem; 
+        margin-bottom: 2rem;
+      }
+
+      .toolbar-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-wrapper {
+        min-width: auto;
+      }
+
+      .stats-bar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .sort-options {
+        justify-content: center;
+      }
+
+      .pub-list li {
+        padding: 1.5rem;
+      }
+
+      .pub-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-brand {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wrap {
+        padding: 0.75rem;
+      }
+
+      .container {
+        padding: 0 0.75rem;
+      }
+
+      main {
+        padding: 2rem 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .pub-toolbar {
+        padding: 1.5rem;
+      }
+
+      .pub-list li {
+        padding: 1.25rem;
+      }
+
+      .pub-title {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --bg-light: #0f172a;
+        --bg-card: #1e293b;
+        --border-color: #334155;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    button:focus,
+    input:focus,
+    select:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Loading animation */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading {
+      animation: pulse 2s infinite;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" role="banner">
-  <div class="container header-wrap">
-    <a class="brand" href="index.html" aria-label="Stanfield Lab home">
-      <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
-    </a>
-    <nav aria-label="Primary">
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-      <ul id="primaryNav" class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">People</a></li>
-        <li><a href="publications.html" aria-current="page">Publications</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="opportunities.html">Opportunities</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
-  </div>
-</header>
+  <header class="site-header" role="banner">
+    <div class="container header-wrap">
+      <a class="brand" href="index.html" aria-label="Stanfield Lab home">
+        <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
+      </a>
+      <nav aria-label="Primary">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul id="primaryNav" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html" aria-current="page">Publications</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="opportunities.html">Opportunities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
 
-<main id="main" class="container">
-  <h1>Publications</h1>
+  <main id="main" class="container">
+    <h1>Publications</h1>
+    
+    <p class="page-intro">
+      Explore our latest research contributions in viral oncology, guinea pig disease models, and translational immunology. Our publications demonstrate the impact of our work in advancing preclinical cancer research and vaccine development.
+    </p>
 
-  <div class="pub-toolbar">
-    <input id="pubSearch" type="search" placeholder="Search by title, author, year…" aria-label="Search publications">
-    <select id="pubYearFilter" aria-label="Filter by year"></select>
-  </div>
-  <ol id="pubList" class="pub-list" aria-live="polite"></ol>
-
-  <script>
-    // Publications loader (robust to different JSON shapes)
-    async function loadPublications() {
-      const pubList = document.getElementById('pubList');
-      const pubYearFilter = document.getElementById('pubYearFilter');
-      const pubSearch = document.getElementById('pubSearch');
-      let publications = [];
-
-      try {
-        const res = await fetch('assets/publications.json', { cache: 'no-store' });
-        const data = await res.json();
-
-        // Accept either an array or { publications: [...] }
-        const raw = Array.isArray(data) ? data
-                  : (Array.isArray(data.publications) ? data.publications : []);
-
-        // Normalize fields and coerce types
-        publications = raw.map(p => ({
-          title: p.title || '',
-          authors: p.authors || p.author || '',
-          journal: p.journal || '',
-          year: p.year ? Number(p.year) : undefined,
-          link: p.link || ''
-        }));
-
-        // Sort by year desc, then title
-        publications.sort((a, b) => (b.year || 0) - (a.year || 0) || a.title.localeCompare(b.title));
-      } catch (e) {
-        pubList.innerHTML = '<li class="error">Could not load publications.</li>';
-        return;
-      }
-
-      function formatPub(pub) {
-        return `
-          <li>
-            <span class="pub-title">${pub.title}</span><br>
-            <span class="pub-authors">${pub.authors}</span>
-            <span class="pub-journal">${pub.journal ? ' • ' + pub.journal : ''}</span>
-            <span class="pub-year">${pub.year ? ' • ' + pub.year : ''}</span>
-            ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener">[Link]</a>` : ''}
-          </li>
-        `;
-      }
-
-      function renderList(list) {
-        pubList.innerHTML = list.length
-          ? list.map(formatPub).join('')
-          : '<li class="muted">No publications match your filters.</li>';
-      }
-
-      // Year filter options
-      const years = Array.from(new Set(publications.map(p => p.year).filter(Boolean))).sort((a,b)=>b-a);
-      pubYearFilter.innerHTML = `<option value="">All years</option>` + years.map(y => `<option value="${y}">${y}</option>`).join('');
-
-      function filterAndRender() {
-        const search = pubSearch.value.trim().toLowerCase();
-        const year = pubYearFilter.value;
-        let filtered = publications;
-
-        if (year) filtered = filtered.filter(p => String(p.year) === year);
-        if (search) {
-          filtered = filtered.filter(p =>
-            (p.title && p.title.toLowerCase().includes(search)) ||
-            (p.authors && p.authors.toLowerCase().includes(search)) ||
-            (p.journal && p.journal.toLowerCase().includes(search)) ||
-            (p.year && String(p.year).includes(search))
-          );
-        }
-        renderList(filtered);
-      }
-
-      pubSearch.addEventListener('input', filterAndRender);
-      pubYearFilter.addEventListener('change', filterAndRender);
-
-      // Initial render
-      renderList(publications);
-    }
-
-    document.addEventListener('DOMContentLoaded', loadPublications);
-  </script>
-</main>
-
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
-      <div>
-        <h3>Stanfield Lab</h3>
-        <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+    <div class="pub-toolbar">
+      <div class="toolbar-content">
+        <div class="search-wrapper">
+          <div class="search-icon">🔍</div>
+          <input id="pubSearch" type="search" placeholder="Search by title, author, journal, or year…" aria-label="Search publications">
+        </div>
+        <select id="pubYearFilter" aria-label="Filter by year"></select>
       </div>
     </div>
-    <div>
-      <h4>Find us</h4>
-      <p>
-        <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
-        Baton Rouge, LA 70803
-      </p>
+
+    <div class="stats-bar">
+      <div class="pub-count">
+        Showing <span id="displayCount">0</span> of <span id="totalCount">0</span> publications
+      </div>
+      <div class="sort-options">
+        <button class="sort-btn active" data-sort="year-desc" aria-label="Sort by year, newest first">Newest First</button>
+        <button class="sort-btn" data-sort="year-asc" aria-label="Sort by year, oldest first">Oldest First</button>
+        <button class="sort-btn" data-sort="title" aria-label="Sort alphabetically by title">A-Z</button>
+      </div>
     </div>
-    <div>
-      <h4>Contact</h4>
-      <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+
+    <ol id="pubList" class="pub-list" aria-live="polite"></ol>
+
+    <script>
+      // Publications loader (robust to different JSON shapes)
+      async function loadPublications() {
+        const pubList = document.getElementById('pubList');
+        const pubYearFilter = document.getElementById('pubYearFilter');
+        const pubSearch = document.getElementById('pubSearch');
+        const totalCount = document.getElementById('totalCount');
+        const displayCount = document.getElementById('displayCount');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        let publications = [];
+        let currentSort = 'year-desc';
+
+        function showError(msg) {
+          pubList.innerHTML = `<li class="error">${msg}</li>`;
+          totalCount.textContent = '0';
+          displayCount.textContent = '0';
+        }
+
+        function showLoading() {
+          pubList.innerHTML = '<li class="loading" style="text-align: center; padding: 3rem; color: var(--text-muted);">Loading publications...</li>';
+        }
+
+        showLoading();
+
+        try {
+          const res = await fetch('assets/publications.json?v=' + Date.now(), { cache: 'no-store' });
+          if (!res.ok) throw new Error(`HTTP ${res.status} loading publications.json`);
+          
+          const text = await res.text();
+          if (text.trim().startsWith('<')) {
+            throw new Error('Expected JSON but received HTML (check path or 404).');
+          }
+
+          const data = JSON.parse(text);
+          const raw = Array.isArray(data) ? data
+                    : (Array.isArray(data.publications) ? data.publications : []);
+
+          if (!Array.isArray(raw)) {
+            throw new Error('publications.json must be an array or { "publications": [...] }.');
+          }
+
+          // Normalize fields and coerce types
+          publications = raw.map((p, i) => {
+            if (!p || typeof p !== 'object') {
+              console.warn('Bad entry at index', i, p);
+              return { title: '', authors: '', journal: '', year: null, link: '' };
+            }
+            return {
+              title: p.title || '',
+              authors: p.authors || p.author || '',
+              journal: p.journal || '',
+              year: p.year ? Number(p.year) : null,
+              link: p.link || ''
+            };
+          });
+
+          totalCount.textContent = publications.length;
+
+        } catch (e) {
+          console.error('Error loading publications:', e);
+          showError('Could not load publications: ' + e.message);
+          return;
+        }
+
+        function sortPublications(publications, sortType) {
+          const sorted = [...publications];
+          switch (sortType) {
+            case 'year-desc':
+              return sorted.sort((a, b) => (b.year || 0) - (a.year || 0) || a.title.localeCompare(b.title));
+            case 'year-asc':
+              return sorted.sort((a, b) => (a.year || 9999) - (b.year || 9999) || a.title.localeCompare(b.title));
+            case 'title':
+              return sorted.sort((a, b) => a.title.localeCompare(b.title));
+            default:
+              return sorted;
+          }
+        }
+
+        function formatPub(pub, index) {
+          const title = pub.title || 'Untitled Publication';
+          const authors = pub.authors || 'Unknown Authors';
+          const journal = pub.journal || '';
+          const year = pub.year || '';
+          const link = pub.link || '';
+
+          return `
+            <li style="animation-delay: ${index * 0.1}s;">
+              <div class="pub-title">${title}</div>
+              <div class="pub-authors">${authors}</div>
+              <div class="pub-meta">
+                ${journal ? `<span class="pub-journal">${journal}</span>` : ''}
+                ${year ? `<span class="pub-year">${year}</span>` : ''}
+                ${link ? `<a href="${link}" class="pub-link" target="_blank" rel="noopener" aria-label="View publication">View Publication</a>` : ''}
+              </div>
+            </li>
+          `;
+        }
+
+        function renderList(list) {
+          displayCount.textContent = list.length;
+          
+          if (list.length === 0) {
+            pubList.innerHTML = '<li class="muted">No publications match your current search criteria. Try adjusting your filters.</li>';
+          } else {
+            const sorted = sortPublications(list, currentSort);
+            pubList.innerHTML = sorted.map(formatPub).join('');
+          }
+        }
+
+        // Year filter options
+        const years = Array.from(new Set(publications.map(p => p.year).filter(Boolean))).sort((a,b)=>b-a);
+        pubYearFilter.innerHTML = `<option value="">All years</option>` + years.map(y => `<option value="${y}">${y}</option>`).join('');
+
+        function filterAndRender() {
+          const search = pubSearch.value.trim().toLowerCase();
+          const year = pubYearFilter.value;
+          let filtered = publications;
+
+          if (year) {
+            filtered = filtered.filter(p => String(p.year) === year);
+          }
+          
+          if (search) {
+            filtered = filtered.filter(p =>
+              (p.title && p.title.toLowerCase().includes(search)) ||
+              (p.authors && p.authors.toLowerCase().includes(search)) ||
+              (p.journal && p.journal.toLowerCase().includes(search)) ||
+              (p.year && String(p.year).includes(search))
+            );
+          }
+          
+          renderList(filtered);
+        }
+
+        // Sort button handlers
+        sortButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            sortButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentSort = btn.dataset.sort;
+            filterAndRender();
+          });
+        });
+
+        pubSearch.addEventListener('input', filterAndRender);
+        pubYearFilter.addEventListener('change', filterAndRender);
+
+        // Initial render
+        renderList(publications);
+      }
+
+      // Mobile navigation and initialization
+      document.addEventListener('DOMContentLoaded', () => {
+        loadPublications();
+        
+        const navToggle = document.getElementById('navToggle');
+        const primaryNav = document.getElementById('primaryNav');
+
+        if (navToggle && primaryNav) {
+          navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+            primaryNav.setAttribute('data-visible', (!isExpanded).toString());
+          });
+        }
+
+        // Theme toggle (placeholder functionality)
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            // Theme toggle logic would go here
+            console.log('Theme toggle clicked');
+          });
+        }
+
+        // Year update for footer
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+      });
+    </script>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+        <div>
+          <h3>Stanfield Lab</h3>
+          <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        </div>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p>
+          <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
+          Baton Rouge, LA 70803
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+      </div>
     </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> Stanfield Lab • LSU SVM</p>
-  </div>
-  <script src="assets/script.js"></script>
-</footer>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2024</span> Stanfield Lab • LSU SVM</p>
+    </div>
+  </footer>
 
 </body>
 </html>
