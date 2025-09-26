@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab Fun • Stanfield Lab</title>
+  <meta name="description" content="Stanfield Lab at LSU SVM: Lab culture, team activities, and behind-the-scenes moments from our viral oncology research group.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --primary-blue: #0ea5e9;
+      --primary-green: #10b981;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --accent-orange: #f59e0b;
+      --accent-purple: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-blue);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      z-index: 2000;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .site-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .brand-img { height: 40px; margin-right: 0.5rem; }
+
+    nav { display: flex; align-items: center; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-list a:hover,
+    .nav-list a[aria-current="page"] {
+      background-color: var(--bg-light);
+      color: var(--primary-blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    main { 
+      padding: 3rem 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .page-intro {
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      background: var(--bg-card);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .slideshow-wrapper {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .slide-caption h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .slide-caption p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slideshow-controls {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .slideshow-controls:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: var(--shadow-md);
+    }
+
+    .prev {
+      left: 1rem;
+    }
+
+    .next {
+      right: 1rem;
+    }
+
+    .slideshow-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot:hover,
+    .dot.active {
+      background: var(--primary-blue);
+      transform: scale(1.2);
+    }
+
+    .slideshow-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: var(--bg-light);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .slide-counter {
+      font-weight: 600;
+    }
+
+    .slideshow-controls-bottom {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      color: var(--text-dark);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-blue);
+      color: white;
+      border-color: var(--primary-blue);
+    }
+
+    .control-btn.active {
+      background: var(--primary-green);
+      color: white;
+      border-color: var(--primary-green);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .photo-thumbnail {
+      aspect-ratio: 1;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .photo-thumbnail:hover {
+      transform: scale(1.05);
+      border-color: var(--primary-blue);
+      box-shadow: var(--shadow-md);
+    }
+
+    .photo-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .photo-thumbnail:hover img {
+      transform: scale(1.1);
+    }
+
+    .upload-instructions {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--text-muted);
+    }
+
+    .upload-instructions h3 {
+      color: var(--primary-blue);
+      margin: 0 0 1rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+    }
+
+    .loading-spinner {
+      width: 2rem;
+      height: 2rem;
+      border: 3px solid var(--border-color);
+      border-radius: 50%;
+      border-top-color: var(--primary-blue);
+      animation: spin 1s ease-in-out infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #fecaca;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .site-footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo { height: 50px; }
+
+    .footer-brand h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+    }
+
+    .footer-brand p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid h4 {
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .footer-grid a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-grid a:hover {
+      color: var(--primary-blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(-100vh);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .nav-list[data-visible="true"] {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav-list a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      h1 { 
+        font-size: 2.5rem; 
+        margin-bottom: 2rem;
+      }
+
+      .page-intro { 
+        font-size: 1.1rem; 
+        margin-bottom: 2rem;
+      }
+
+      .slideshow-wrapper {
+        height: 350px;
+      }
+
+      .slideshow-controls {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .prev {
+        left: 0.5rem;
+      }
+
+      .next {
+        right: 0.5rem;
+      }
+
+      .slideshow-info {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-brand {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wrap {
+        padding: 0.75rem;
+      }
+
+      .container {
+        padding: 0 0.75rem;
+      }
+
+      main {
+        padding: 2rem 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .slideshow-wrapper {
+        height: 280px;
+      }
+
+      .upload-instructions {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --bg-light: #0f172a;
+        --bg-card: #1e293b;
+        --border-color: #334155;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    button:focus,
+    input:focus,
+    select:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-wrap">
+      <a class="brand" href="index.html" aria-label="Stanfield Lab home">
+        <img src="assets/stanfield-lab-logo.svg" alt="Stanfield Lab" class="brand-img">
+      </a>
+      <nav aria-label="Primary">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul id="primaryNav" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="lab-fun.html" aria-current="page">Lab Fun</a></li>
+          <li><a href="opportunities.html">Opportunities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <h1>Lab Fun</h1>
+    
+    <p class="page-intro">
+      Behind every breakthrough discovery is a dedicated team that knows how to work hard and have fun together. Take a look at some memorable moments from our lab family - from research celebrations to team outings and everything in between.
+    </p>
+
+    <div id="slideshowContainer" class="slideshow-container">
+      <div class="slideshow-wrapper">
+        <div id="slides"></div>
+        <button class="slideshow-controls prev" id="prevBtn" aria-label="Previous photo">‹</button>
+        <button class="slideshow-controls next" id="nextBtn" aria-label="Next photo">›</button>
+      </div>
+      
+      <div class="slideshow-dots" id="dotsContainer"></div>
+      
+      <div class="slideshow-info">
+        <div class="slide-counter">
+          <span id="currentSlide">1</span> / <span id="totalSlides">0</span>
+        </div>
+        <div class="slideshow-controls-bottom">
+          <button class="control-btn active" id="playPauseBtn">⏸️ Pause</button>
+          <button class="control-btn" id="shuffleBtn">🔀 Shuffle</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="photoGrid" class="photo-grid"></div>
+
+    <div class="upload-instructions">
+      <h3>📸 How to Add Photos</h3>
+      <p>
+        To add photos to the slideshow:
+        <br>1. Upload your images to <code>assets/people/Lab_fun/</code>
+        <br>2. Update <code>assets/people/Lab_fun/photos.json</code> with image details
+        <br>3. Supported formats: JPG, PNG, WebP
+        <br><small>💡 Tip: Use descriptive filenames and add captions for context!</small>
+      </p>
+    </div>
+
+    <script>
+      class LabFunSlideshow {
+        constructor() {
+          this.photos = [];
+          this.currentIndex = 0;
+          this.autoPlayInterval = null;
+          this.isPlaying = true;
+          this.isShuffled = false;
+          this.shuffledOrder = [];
+          this.init();
+        }
+
+        async init() {
+          await this.loadPhotos();
+          this.renderSlideshow();
+          this.setupEventListeners();
+          this.startAutoPlay();
+        }
+
+        async loadPhotos() {
+          try {
+            // Try to load from photos.json first
+            const response = await fetch('assets/people/Lab_fun/photos.json?v=' + Date.now());
+            if (response.ok) {
+              const data = await response.json();
+              this.photos = Array.isArray(data) ? data : (data.photos || []);
+            }
+          } catch (error) {
+            console.log('Photos.json not found, using default photo list');
+          }
+
+          // If no photos from JSON, try common filenames
+          if (this.photos.length === 0) {
+            const commonNames = [
+              'lab-photo-1.jpg', 'lab-photo-2.jpg', 'lab-photo-3.jpg',
+              'team-meeting.jpg', 'lab-celebration.jpg', 'research-day.jpg',
+              'group-photo.jpg', 'lab-outing.jpg', 'conference-2024.jpg',
+              'holiday-party.jpg', 'graduation.jpg', 'awards-ceremony.jpg'
+            ];
+
+            for (let filename of commonNames) {
+              try {
+                const img = new Image();
+                img.src = `assets/people/Lab_fun/${filename}`;
+                
+                await new Promise((resolve, reject) => {
+                  img.onload = resolve;
+                  img.onerror = reject;
+                  setTimeout(reject, 2000); // 2 second timeout
+                });
+
+                this.photos.push({
+                  filename: filename,
+                  caption: this.generateCaption(filename),
+                  description: `A memorable moment from the Stanfield Lab team.`
+                });
+              } catch (error) {
+                // Photo doesn't exist, continue
+              }
+            }
+          }
+
+          // Show error if no photos found
+          if (this.photos.length === 0) {
+            this.showNoPhotosMessage();
+          }
+        }
+
+        generateCaption(filename) {
+          const name = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '').replace(/[-_]/g, ' ');
+          return name.split(' ').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          ).join(' ');
+        }
+
+        showNoPhotosMessage() {
+          document.getElementById('slideshowContainer').innerHTML = `
+            <div class="loading">
+              <h3>📷 No Photos Yet!</h3>
+              <p>Upload some lab photos to <code>assets/people/Lab_fun/</code> to get started.</p>
+              <p><small>Create a <code>photos.json</code> file to add captions and descriptions.</small></p>
+            </div>
+          `;
+        }
+
+        renderSlideshow() {
+          if (this.photos.length === 0) return;
+
+          const slidesContainer = document.getElementById('slides');
+          const dotsContainer = document.getElementById('dotsContainer');
+          const photoGrid = document.getElementById('photoGrid');
+
+          // Render slides
+          slidesContainer.innerHTML = this.photos.map((photo, index) => `
+            <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+              <img src="assets/people/Lab_fun/${photo.filename}" alt="${photo.caption || 'Lab photo'}" loading="lazy">
+              <div class="slide-caption">
+                <h3>${photo.caption || 'Lab Memories'}</h3>
+                <p>${photo.description || 'A moment from our lab journey.'}</p>
+              </div>
+            </div>
+          `).join('');
+
+          // Render dots
+          dotsContainer.innerHTML = this.photos.map((_, index) => 
+            `<button class="dot ${index === 0 ? 'active' : ''}" onclick="slideshow.goToSlide(${index})" aria-label="Go to photo ${index + 1}"></button>`
+          ).join('');
+
+          // Render thumbnail grid
+          photoGrid.innerHTML = this.photos.map((photo, index) => `
+            <div class="photo-thumbnail" onclick="slideshow.goToSlide(${index})" title="${photo.caption}">
+              <img src="assets/people/Lab_fun/${photo.filename}" alt="${photo.caption}" loading="lazy">
+            </div>
+          `).join('');
+
+          // Update counters
+          document.getElementById('totalSlides').textContent = this.photos.length;
+          document.getElementById('currentSlide').textContent = '1';
+        }
+
+        setupEventListeners() {
+          document.getElementById('prevBtn').addEventListener('click', () => this.previousSlide());
+          document.getElementById('nextBtn').addEventListener('click', () => this.nextSlide());
+          
+          document.getElementById('playPauseBtn').addEventListener('click', () => this.toggleAutoPlay());
+          document.getElementById('shuffleBtn').addEventListener('click', () => this.toggleShuffle());
+
+          // Keyboard navigation
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.previousSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+            if (e.key === ' ') {
+              e.preventDefault();
+              this.toggleAutoPlay();
+            }
+          });
+
+          // Mobile navigation
+          const navToggle = document.getElementById('navToggle');
+          const primaryNav = document.getElementById('primaryNav');
+
+          if (navToggle && primaryNav) {
+            navToggle.addEventListener('click', () => {
+              const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+              navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+              primaryNav.setAttribute('data-visible', (!isExpanded).toString());
+            });
+          }
+
+          // Theme toggle
+          const themeToggle = document.getElementById('themeToggle');
+          if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+              console.log('Theme toggle clicked');
+            });
+          }
+        }
+
+        goToSlide(index) {
+          if (this.photos.length === 0) return;
+          
+          this.currentIndex = index;
+          
+          // Update slides
+          const slides = document.querySelectorAll('.slide');
+          const dots = document.querySelectorAll('.dot');
+          
+          slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+          });
+          
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+
+          // Update counter
+          document.getElementById('currentSlide').textContent = index + 1;
+        }
+
+        nextSlide() {
+          if (this.photos.length === 0) return;
+          
+          let nextIndex;
+          if (this.isShuffled) {
+            const currentShuffledIndex = this.shuffledOrder.indexOf(this.currentIndex);
+            const nextShuffledIndex = (currentShuffledIndex + 1) % this.shuffledOrder.length;
+            nextIndex = this.shuffledOrder[nextShuffledIndex];
+          } else {
+            nextIndex = (this.currentIndex + 1) % this.photos.length;
+          }
+          
+          this.goToSlide(nextIndex);
+        }
+
+        previousSlide() {
+          if (this.photos.length === 0) return;
+          
+          let prevIndex;
+          if (this.isShuffled) {
+            const currentShuffledIndex = this.shuffledOrder.indexOf(this.currentIndex);
+            const prevShuffledIndex = currentShuffledIndex === 0 ? this.shuffledOrder.length - 1 : currentShuffledIndex - 1;
+            prevIndex = this.shuffledOrder[prevShuffledIndex];
+          } else {
+            prevIndex = this.currentIndex === 0 ? this.photos.length - 1 : this.currentIndex - 1;
+          }
+          
+          this.goToSlide(prevIndex);
+        }
+
+        startAutoPlay() {
+          if (this.photos.length === 0) return;
+          
+          this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+          }, 4000); // 4 seconds
+        }
+
+        stopAutoPlay() {
+          if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+          }
+        }
+
+        toggleAutoPlay() {
+          const btn = document.getElementById('playPauseBtn');
+          
+          if (this.isPlaying) {
+            this.stopAutoPlay();
+            btn.textContent = '▶️ Play';
+            btn.classList.remove('active');
+          } else {
+            this.startAutoPlay();
+            btn.textContent = '⏸️ Pause';
+            btn.classList.add('active');
+          }
+          
+          this.isPlaying = !this.isPlaying;
+        }
+
+        toggleShuffle() {
+          const btn = document.getElementById('shuffleBtn');
+          
+          if (this.isShuffled) {
+            this.isShuffled = false;
+            btn.textContent = '🔀 Shuffle';
+            btn.classList.remove('active');
+          } else {
+            this.isShuffled = true;
+            this.shuffledOrder = [...Array(this.photos.length).keys()].sort(() => Math.random() - 0.5);
+            btn.textContent = '📋 Normal';
+            btn.classList.add('active');
+          }
+        }
+      }
+
+      // Initialize slideshow
+      let slideshow;
+      document.addEventListener('DOMContentLoaded', () => {
+        slideshow = new LabFunSlideshow();
+        
+        // Update footer year
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+      });
+    </script>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/stanfield-lab-icon.svg" alt="Stanfield Lab icon" class="footer-logo">
+        <div>
+          <h3>Stanfield Lab</h3>
+          <p>Viral Oncology • Small-Animal Models • Translational Immunology</p>
+        </div>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p>
+          <a href="https://www.lsu.edu/vetmed/index.php" target="_blank" rel="noopener">LSU School of Veterinary Medicine</a><br>
+          Baton Rouge, LA 70803
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:bstanf5@lsu.edu">bstanf5@lsu.edu</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2024</span> Stanfield Lab • LSU SVM</p>
+    </div>
+  </footer>
+
+</body>
+</html>
