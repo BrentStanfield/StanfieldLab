@@ -207,29 +207,6 @@ h1 {
   object-position: center;
 }
 
-.slide-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: white;
-  padding: 3rem 2rem 1.5rem;
-  text-align: center;
-}
-
-.slide-caption h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.slide-caption p {
-  margin: 0;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(20px); }
   to { opacity: 1; transform: translateX(0); }
@@ -669,35 +646,15 @@ select:focus {
 <div class="upload-instructions">
   <h3>📸 How to Add Photos</h3>
   <p>
-    <strong>Step 1:</strong> Upload photos to the <code>assets/people/Lab_fun/</code> folder in your GitHub repository
-    <br><strong>Step 2:</strong> Use simple filenames like:
-    <br>• <code>lab-photo-1.jpg</code>, <code>lab-photo-2.jpg</code>
-    <br>• <code>team-photo.jpg</code>, <code>group-photo.jpg</code>
-    <br>• <code>lab-celebration.jpg</code>, <code>conference-2024.jpg</code>
-    <br><strong>Step 3:</strong> Supported formats: JPG, JPEG, PNG (any case)
-    <br><strong>Step 4 (Optional):</strong> Create <code>photos.json</code> for custom captions
+    <strong>Simple:</strong> Just upload photos to the <code>assets/people/Lab_fun/</code> folder in your GitHub repository
+    <br>• Any JPG, JPEG, or PNG files will automatically appear in the slideshow
+    <br>• Photos will auto-advance every 4 seconds
+    <br>• Use the thumbnail grid below to jump to specific photos
+    <br>• Play/pause and shuffle controls available
   </p>
-  <details style="margin-top: 1rem;">
-    <summary style="cursor: pointer; font-weight: 600; color: var(--primary-blue);">📋 Sample photos.json format</summary>
-    <pre style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.85rem; margin-top: 0.5rem;">[
-```
-
-{
-“filename”: “team-photo-2024.jpg”,
-“caption”: “Stanfield Lab Team 2024”,
-“description”: “Our research team working on viral oncology breakthroughs.”
-},
-{
-“filename”: “lab-celebration.jpg”,
-“caption”: “Research Milestone”,
-“description”: “Celebrating a major discovery in guinea pig cancer models.”
-}
-]</pre>
-</details>
-<p><small>💡 <strong>Tip:</strong> Open browser console (F12) to see photo loading details and troubleshoot issues.</small></p>
+  <p><small>💡 <strong>Tip:</strong> Open browser console (F12) to see photo loading details if needed.</small></p>
 </div>
 
-```
 <script>
   class LabFunSlideshow {
     constructor() {
@@ -736,7 +693,18 @@ select:focus {
         
         // Try common photo file extensions and names
         const possibleFiles = [
-          // Common lab photo names
+          // User's actual photo names (IMG_XXXX.jpeg pattern)
+          'IMG_3819.jpeg', 'IMG_3826.jpeg', 'IMG_4089.jpeg', 'IMG_4102.jpeg', 'IMG_4109.jpeg',
+          // Try more IMG patterns in case they add more
+          'IMG_3820.jpeg', 'IMG_3821.jpeg', 'IMG_3822.jpeg', 'IMG_3823.jpeg', 'IMG_3824.jpeg', 'IMG_3825.jpeg',
+          'IMG_3827.jpeg', 'IMG_3828.jpeg', 'IMG_3829.jpeg', 'IMG_3830.jpeg',
+          'IMG_4090.jpeg', 'IMG_4091.jpeg', 'IMG_4092.jpeg', 'IMG_4093.jpeg', 'IMG_4094.jpeg', 'IMG_4095.jpeg',
+          'IMG_4096.jpeg', 'IMG_4097.jpeg', 'IMG_4098.jpeg', 'IMG_4099.jpeg', 'IMG_4100.jpeg', 'IMG_4101.jpeg',
+          'IMG_4103.jpeg', 'IMG_4104.jpeg', 'IMG_4105.jpeg', 'IMG_4106.jpeg', 'IMG_4107.jpeg', 'IMG_4108.jpeg',
+          'IMG_4110.jpeg', 'IMG_4111.jpeg', 'IMG_4112.jpeg', 'IMG_4113.jpeg', 'IMG_4114.jpeg', 'IMG_4115.jpeg',
+          // Try with .jpg extension too
+          'IMG_3819.jpg', 'IMG_3826.jpg', 'IMG_4089.jpg', 'IMG_4102.jpg', 'IMG_4109.jpg',
+          // Common lab photo names (fallback)
           'lab-photo-1.jpg', 'lab-photo-2.jpg', 'lab-photo-3.jpg', 'lab-photo-4.jpg', 'lab-photo-5.jpg',
           'team-photo.jpg', 'team-meeting.jpg', 'lab-celebration.jpg', 'research-day.jpg',
           'group-photo.jpg', 'lab-outing.jpg', 'conference-2024.jpg', 'conference-2025.jpg',
@@ -748,10 +716,7 @@ select:focus {
           'lab-photo-1.png', 'lab-photo-2.png', 'team-photo.png', 'group-photo.png',
           'lab-photo-1.jpeg', 'lab-photo-2.jpeg', 'team-photo.jpeg',
           // Try capital extensions
-          'lab-photo-1.JPG', 'lab-photo-2.JPG', 'team-photo.JPG', 'group-photo.JPG',
-          // Try variations
-          'Lab_photo_1.jpg', 'Lab_photo_2.jpg', 'Team_photo.jpg', 'Group_photo.jpg',
-          'LabPhoto1.jpg', 'LabPhoto2.jpg', 'TeamPhoto.jpg', 'GroupPhoto.jpg'
+          'lab-photo-1.JPG', 'lab-photo-2.JPG', 'team-photo.JPG', 'group-photo.JPG'
         ];
 
         const foundPhotos = [];
@@ -764,9 +729,7 @@ select:focus {
             if (response.ok) {
               console.log('Found photo:', filename);
               foundPhotos.push({
-                filename: filename,
-                caption: this.generateCaption(filename),
-                description: `A memorable moment from the Stanfield Lab team.`
+                filename: filename
               });
             }
           } catch (error) {
@@ -788,6 +751,27 @@ select:focus {
     }
 
     generateCaption(filename) {
+      // Handle IMG_XXXX.jpeg pattern specially
+      if (filename.match(/^IMG_\d+\.(jpeg|jpg|png)$/i)) {
+        const photoNumber = filename.match(/\d+/)[0];
+        const captions = [
+          'Stanfield Lab Team Photo',
+          'Lab Research Activities', 
+          'Team Collaboration',
+          'Lab Celebration',
+          'Research Milestone',
+          'Team Building Event',
+          'Lab Meeting',
+          'Conference Presentation',
+          'Research Discussion',
+          'Team Achievement'
+        ];
+        // Use photo number to pick a caption consistently
+        const index = parseInt(photoNumber) % captions.length;
+        return captions[index] + ` (${photoNumber})`;
+      }
+      
+      // Handle regular filenames
       const name = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '').replace(/[-_]/g, ' ');
       return name.split(' ').map(word => 
         word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
@@ -801,10 +785,9 @@ select:focus {
           <p>Looking for photos in: <code>assets/people/Lab_fun/</code></p>
           <div style="text-align: left; margin: 1rem 0; padding: 1rem; background: var(--bg-light); border-radius: 0.5rem; font-size: 0.9rem;">
             <strong>To add photos:</strong><br>
-            1. Upload images to <code>assets/people/Lab_fun/</code><br>
-            2. Use simple names like: <code>lab-photo-1.jpg</code>, <code>team-photo.jpg</code><br>
-            3. Supported formats: .jpg, .jpeg, .png, .JPG<br>
-            4. Or create a <code>photos.json</code> file (see instructions below)
+            1. Upload any JPG, JPEG, or PNG files to <code>assets/people/Lab_fun/</code><br>
+            2. Photos will automatically appear in the slideshow<br>
+            3. Any filename works - they'll be detected automatically
           </div>
           <p><small>Check browser console (F12) for detailed photo loading information.</small></p>
         </div>
@@ -821,11 +804,7 @@ select:focus {
       // Render slides
       slidesContainer.innerHTML = this.photos.map((photo, index) => `
         <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
-          <img src="assets/people/Lab_fun/${photo.filename}" alt="${photo.caption || 'Lab photo'}" loading="lazy">
-          <div class="slide-caption">
-            <h3>${photo.caption || 'Lab Memories'}</h3>
-            <p>${photo.description || 'A moment from our lab journey.'}</p>
-          </div>
+          <img src="assets/people/Lab_fun/${photo.filename}" alt="Lab photo ${index + 1}" loading="lazy">
         </div>
       `).join('');
 
@@ -836,8 +815,8 @@ select:focus {
 
       // Render thumbnail grid
       photoGrid.innerHTML = this.photos.map((photo, index) => `
-        <div class="photo-thumbnail" onclick="slideshow.goToSlide(${index})" title="${photo.caption}">
-          <img src="assets/people/Lab_fun/${photo.filename}" alt="${photo.caption}" loading="lazy">
+        <div class="photo-thumbnail" onclick="slideshow.goToSlide(${index})" title="Lab photo ${index + 1}">
+          <img src="assets/people/Lab_fun/${photo.filename}" alt="Lab photo ${index + 1}" loading="lazy">
         </div>
       `).join('');
 
