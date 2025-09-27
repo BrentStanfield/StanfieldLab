@@ -627,7 +627,7 @@ select:focus {
           <li><a href="people.html">People</a></li>
           <li><a href="publications.html">Publications</a></li>
           <li><a href="news.html">News</a></li>
-          <li><a href="lab-fun.html" aria-current="page">Lab Fun</a></li>
+          <li><a href="Lab_Fun.html" aria-current="page">Lab Fun</a></li>
           <li><a href="opportunities.html">Opportunities</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -669,14 +669,35 @@ select:focus {
 <div class="upload-instructions">
   <h3>📸 How to Add Photos</h3>
   <p>
-    To add photos to the slideshow:
-    <br>1. Upload your images to <code>assets/people/Lab_fun/</code>
-    <br>2. Update <code>assets/people/Lab_fun/photos.json</code> with image details
-    <br>3. Supported formats: JPG, PNG, WebP
-    <br><small>💡 Tip: Use descriptive filenames and add captions for context!</small>
+    <strong>Step 1:</strong> Upload photos to the <code>assets/people/Lab_fun/</code> folder in your GitHub repository
+    <br><strong>Step 2:</strong> Use simple filenames like:
+    <br>• <code>lab-photo-1.jpg</code>, <code>lab-photo-2.jpg</code>
+    <br>• <code>team-photo.jpg</code>, <code>group-photo.jpg</code>
+    <br>• <code>lab-celebration.jpg</code>, <code>conference-2024.jpg</code>
+    <br><strong>Step 3:</strong> Supported formats: JPG, JPEG, PNG (any case)
+    <br><strong>Step 4 (Optional):</strong> Create <code>photos.json</code> for custom captions
   </p>
+  <details style="margin-top: 1rem;">
+    <summary style="cursor: pointer; font-weight: 600; color: var(--primary-blue);">📋 Sample photos.json format</summary>
+    <pre style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.85rem; margin-top: 0.5rem;">[
+```
+
+{
+“filename”: “team-photo-2024.jpg”,
+“caption”: “Stanfield Lab Team 2024”,
+“description”: “Our research team working on viral oncology breakthroughs.”
+},
+{
+“filename”: “lab-celebration.jpg”,
+“caption”: “Research Milestone”,
+“description”: “Celebrating a major discovery in guinea pig cancer models.”
+}
+]</pre>
+</details>
+<p><small>💡 <strong>Tip:</strong> Open browser console (F12) to see photo loading details and troubleshoot issues.</small></p>
 </div>
 
+```
 <script>
   class LabFunSlideshow {
     constructor() {
@@ -698,50 +719,71 @@ select:focus {
 
     async loadPhotos() {
       try {
-        // Try to load from photos.json first
+        // First, try to load from photos.json
         const response = await fetch('assets/people/Lab_fun/photos.json?v=' + Date.now());
         if (response.ok) {
           const data = await response.json();
           this.photos = Array.isArray(data) ? data : (data.photos || []);
+          console.log('Loaded photos from photos.json:', this.photos.length);
         }
       } catch (error) {
-        console.log('Photos.json not found, using default photo list');
+        console.log('No photos.json found, will scan for image files');
       }
 
-      // If no photos from JSON, try common filenames
+      // If no photos from JSON, try to detect images in the folder
       if (this.photos.length === 0) {
-        const commonNames = [
-          'lab-photo-1.jpg', 'lab-photo-2.jpg', 'lab-photo-3.jpg',
-          'team-meeting.jpg', 'lab-celebration.jpg', 'research-day.jpg',
-          'group-photo.jpg', 'lab-outing.jpg', 'conference-2024.jpg',
-          'holiday-party.jpg', 'graduation.jpg', 'awards-ceremony.jpg'
+        console.log('Scanning for image files...');
+        
+        // Try common photo file extensions and names
+        const possibleFiles = [
+          // Common lab photo names
+          'lab-photo-1.jpg', 'lab-photo-2.jpg', 'lab-photo-3.jpg', 'lab-photo-4.jpg', 'lab-photo-5.jpg',
+          'team-photo.jpg', 'team-meeting.jpg', 'lab-celebration.jpg', 'research-day.jpg',
+          'group-photo.jpg', 'lab-outing.jpg', 'conference-2024.jpg', 'conference-2025.jpg',
+          'holiday-party.jpg', 'graduation.jpg', 'awards-ceremony.jpg', 'lab-retreat.jpg',
+          // Try numbered files
+          'photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg',
+          'image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg', 'image5.jpg',
+          // Try with different extensions
+          'lab-photo-1.png', 'lab-photo-2.png', 'team-photo.png', 'group-photo.png',
+          'lab-photo-1.jpeg', 'lab-photo-2.jpeg', 'team-photo.jpeg',
+          // Try capital extensions
+          'lab-photo-1.JPG', 'lab-photo-2.JPG', 'team-photo.JPG', 'group-photo.JPG',
+          // Try variations
+          'Lab_photo_1.jpg', 'Lab_photo_2.jpg', 'Team_photo.jpg', 'Group_photo.jpg',
+          'LabPhoto1.jpg', 'LabPhoto2.jpg', 'TeamPhoto.jpg', 'GroupPhoto.jpg'
         ];
 
-        for (let filename of commonNames) {
+        const foundPhotos = [];
+        
+        for (let filename of possibleFiles) {
           try {
-            const img = new Image();
-            img.src = `assets/people/Lab_fun/${filename}`;
+            const testUrl = `assets/people/Lab_fun/${filename}`;
+            const response = await fetch(testUrl, { method: 'HEAD' });
             
-            await new Promise((resolve, reject) => {
-              img.onload = resolve;
-              img.onerror = reject;
-              setTimeout(reject, 2000); // 2 second timeout
-            });
-
-            this.photos.push({
-              filename: filename,
-              caption: this.generateCaption(filename),
-              description: `A memorable moment from the Stanfield Lab team.`
-            });
+            if (response.ok) {
+              console.log('Found photo:', filename);
+              foundPhotos.push({
+                filename: filename,
+                caption: this.generateCaption(filename),
+                description: `A memorable moment from the Stanfield Lab team.`
+              });
+            }
           } catch (error) {
-            // Photo doesn't exist, continue
+            // File doesn't exist, continue
           }
         }
+
+        this.photos = foundPhotos;
+        console.log('Total photos found:', this.photos.length);
       }
 
       // Show error if no photos found
       if (this.photos.length === 0) {
+        console.log('No photos found in assets/people/Lab_fun/');
         this.showNoPhotosMessage();
+      } else {
+        console.log('Successfully loaded', this.photos.length, 'photos');
       }
     }
 
@@ -755,9 +797,16 @@ select:focus {
     showNoPhotosMessage() {
       document.getElementById('slideshowContainer').innerHTML = `
         <div class="loading">
-          <h3>📷 No Photos Yet!</h3>
-          <p>Upload some lab photos to <code>assets/people/Lab_fun/</code> to get started.</p>
-          <p><small>Create a <code>photos.json</code> file to add captions and descriptions.</small></p>
+          <h3>📷 No Photos Found</h3>
+          <p>Looking for photos in: <code>assets/people/Lab_fun/</code></p>
+          <div style="text-align: left; margin: 1rem 0; padding: 1rem; background: var(--bg-light); border-radius: 0.5rem; font-size: 0.9rem;">
+            <strong>To add photos:</strong><br>
+            1. Upload images to <code>assets/people/Lab_fun/</code><br>
+            2. Use simple names like: <code>lab-photo-1.jpg</code>, <code>team-photo.jpg</code><br>
+            3. Supported formats: .jpg, .jpeg, .png, .JPG<br>
+            4. Or create a <code>photos.json</code> file (see instructions below)
+          </div>
+          <p><small>Check browser console (F12) for detailed photo loading information.</small></p>
         </div>
       `;
     }
